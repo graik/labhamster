@@ -31,7 +31,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category', 'vendor')
 
     ordering = ('name',)
-    search_fields = ('name', 'comment', 'catalog', 'location')
+    search_fields = ('name', 'comment', 'catalog', 'location', 'vendor__name')
 
     save_as = True
 
@@ -86,11 +86,10 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('item', 'quantity', 'Price', 'requested', 'ordered', 
                     'received', 'Status')
     list_filter = ('status', 'ordered_by', 
-                   'item__category__name', 'item__vendor__name')
+                   'item__category__name', 'item__vendor__name', 'created_by')
     ordering = ('item', 'quantity')
 
-    search_fields = ('item__name', 'comment', 'item__comment', 'grant', 
-                     'item__catalog')
+    search_fields = ('comment', 'grant')
 
     save_as = True
 
