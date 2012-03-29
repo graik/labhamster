@@ -71,7 +71,7 @@ class Order(models.Model):
     comment = models.TextField(blank=True)
 
     def __unicode__(self):
-        return u'%04i -- %s' % (self.id, str(self.item))
+        return u'%04i -- %s' % (self.id, unicode(self.item))
 
     def get_absolute_url(self):
         """
@@ -96,7 +96,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_created:
             return self.date_created
-        return ''
+        return u''
 
     requested.allow_tags = True
     requested.admin_order_field = 'date_created'
@@ -105,7 +105,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_ordered:
             return self.date_ordered
-        return ''
+        return u''
 
     ordered.allow_tags = True
     ordered.admin_order_field = 'date_ordered'
@@ -114,7 +114,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_received:
             return self.date_received
-        return ''
+        return u''
 
     received.allow_tags = True
     received.admin_order_field = 'date_ordered'
@@ -123,7 +123,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.price:
             return '%7.2f' % self.price
-        return ''
+        return u''
 
     received.allow_tags = True
     received.admin_order_field = 'date_ordered'
@@ -169,7 +169,7 @@ class Item(models.Model):
                                 help_text='location in the lab')
 
     def __unicode__(self):
-        return u'%s [%s]' % (self.name, str(self.vendor))
+        return u'%s [%s]' % (self.name, unicode(self.vendor))
 
     def related_orders(self):
         """
@@ -245,7 +245,7 @@ class Grant(models.Model):
     comment = models.TextField(blank=True)
 
     def __unicode__(self):
-        return self.name + ' ' + self.grant_id
+        return unicode(self.name + u' ' + self.grant_id)
 
     class Meta:
         ordering = ('name', 'grant_id')
