@@ -17,6 +17,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from customfields import DayModelField, DayConversion
+import tools as T
 
 APP_URL = '/admin/labhamster'
 
@@ -101,7 +102,7 @@ class Order(models.Model):
 
     requested.allow_tags = True
     requested.admin_order_field = 'date_created'
-
+    
     def ordered(self):
         """filter '(None)' display in admin table"""
         if self.date_ordered:

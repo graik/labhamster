@@ -84,7 +84,7 @@ class OrderAdmin(admin.ModelAdmin):
                     'grant_category': admin.VERTICAL}
     
     list_display = ('item', 'quantity', 'Price', 'requested', 'ordered', 
-                    'received', 'Status')
+                    'received', 'truncated_comment', 'Status')
     list_filter = ('status', 'ordered_by', 
                    'item__category__name', 'item__vendor__name', 'created_by')
     ordering = ('-date_created', 'item', 'quantity')
@@ -96,6 +96,12 @@ class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_created'
 
     actions = ['make_ordered', 'make_received', 'make_cancelled']
+
+    def truncated_comment(self, obj):
+        """shorten comment to 15 characters for table display"""
+        return T.truncate( obj.comment, 17 )
+    truncated_comment.short_description = 'comment'
+
 
     def make_ordered(self, request, queryset):
         import datetime
