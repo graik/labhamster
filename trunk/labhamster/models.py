@@ -51,7 +51,8 @@ class Order(models.Model):
 
     item = models.ForeignKey('Item', verbose_name='Item', related_name='orders', 
                              blank=False, null=False, 
-                             help_text='item or material to be ordered')
+                help_text='Click the magnifying lens to select from the list of existing items.\n'+\
+                'For a new item, first click the lens, then click "Add Item" and fill out and save the Item form.' )
 
     unit_size = models.IntegerField(default=1)
 
@@ -134,7 +135,7 @@ class Order(models.Model):
 
 class Item(models.Model):
     
-    name = models.CharField(max_length=30, unique=True, 
+    name = models.CharField(max_length=30, unique=True, primary_key=True,
                             help_text='short descriptive name of this item')
     
     vendor = models.ForeignKey('Vendor', verbose_name='Vendor', 
