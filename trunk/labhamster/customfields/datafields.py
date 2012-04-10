@@ -190,6 +190,8 @@ class DayModelField(models.Field):
         
         return super(DayModelField, self).formfield(**defaults)
 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^labhamster\.customfields\.datafields\.DayModelField"])
 
 if __name__ == '__main__':
     pass
