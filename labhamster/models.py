@@ -70,7 +70,10 @@ class Order(models.Model):
     grant = models.ForeignKey('Grant', null=True, blank=True, db_index=True, 
                               related_name='orders')
 
-    comment = models.TextField(blank=True)
+    comment = models.TextField(blank=True, 
+                               help_text="Order-related remarks. " +\
+        "Please put catalog number and descriptions not here but into the "+\
+        "item page.") 
 
     def __unicode__(self):
         return u'%04i -- %s' % (self.id, unicode(self.item))
@@ -79,7 +82,13 @@ class Order(models.Model):
         """
         Define standard URL for object.get_absolute_url access in templates
         """
-        return APP_URL + '/order/%i/' % self.id
+        return APP_URL + '/'+ self.get_relative_url()
+    
+    def get_relative_url(self):
+        """
+        Define standard relative URL for object access in templates
+        """
+        return 'order/%i/' % self.id
 
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
@@ -177,7 +186,13 @@ class Item(models.Model):
         """
         Define standard URL for object.get_absolute_url access in templates
         """
-        return APP_URL + '/item/%i/' % self.id
+        return APP_URL + '/' + self.get_relative_url()
+    
+    def get_relative_url(self):
+        """
+        Define standard relative URL for object access in templates
+        """
+        return 'item/%i/' % self.id
 
     def related_orders(self):
         """
@@ -232,7 +247,14 @@ class Vendor(models.Model):
         """
         Define standard URL for object.get_absolute_url access in templates
         """
-        return APP_URL + '/vendor/%i/' % self.id
+        return APP_URL + '/' + self.get_relative_url()
+    
+    def get_relative_url(self):
+        """
+        Define standard relative URL for object access in templates
+        """
+        return 'vendor/%i/' % self.id
+    
 
 class Category(models.Model):
 

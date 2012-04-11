@@ -18,11 +18,11 @@
 
         <p>
       
-          <b><a href="{{original.item.get_absolute_url}}" target="_blank">
+          <b><a href="../../{{original.item.get_relative_url}}" target="_blank">
                  {{original.item.name}}</a></b>
 
 
-          from <b><a href="{{original.item.vendor.get_absolute_url}}" target="_blank">
+          from <b><a href="../../{{original.item.vendor.get_relative_url}}" target="_blank">
                     {{original.item.vendor}}</a></b>
 
           ({{original.item.category}})<br>
@@ -57,7 +57,7 @@
 
             <tr class="{% cycle 'row1' 'row2' %}">
     
-              <td><b><a href="{{order.get_absolute_url}}" target="_blank">
+              <td><b><a href="../../{{order.get_relative_url}}" target="_blank">
                  {{order.date_created}}</a></b></td>
               <td>{{order.created_by}}</td>
               <td>{{order.date_ordered|default:"--"}}</td>
