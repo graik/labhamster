@@ -173,6 +173,12 @@ class Item(models.Model):
     def __unicode__(self):
         return u'%s [%s]' % (self.name, unicode(self.vendor))
 
+    def get_absolute_url(self):
+        """
+        Define standard URL for object.get_absolute_url access in templates
+        """
+        return APP_URL + '/item/%i/' % self.id
+
     def related_orders(self):
         """
         @return: QuerySet of orders for this item
@@ -222,6 +228,11 @@ class Vendor(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """
+        Define standard URL for object.get_absolute_url access in templates
+        """
+        return APP_URL + '/vendor/%i/' % self.id
 
 class Category(models.Model):
 
