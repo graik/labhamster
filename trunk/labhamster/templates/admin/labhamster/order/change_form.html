@@ -1,0 +1,84 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_modify adminmedia %}
+
+
+{% block after_field_sets %}
+
+<div class="module aligned">
+  <h2>Related Information</h2>
+      <div class="description">
+        Note, clicking any of the links below will open a new window/tab!
+      </div>
+
+      <p></p>
+
+      {% if original %}
+      
+      <h3>Product or Material</h3>
+
+        <p>
+      
+          <b><a href="{{original.item.get_absolute_url}}" target="_blank">
+                 {{original.item.name}}</a></b>
+
+
+          from <b><a href="{{original.item.vendor.get_absolute_url}}" target="_blank">
+                    {{original.item.vendor}}</a></b>
+
+          ({{original.item.category}})<br>
+
+          {% if original.item.comment %}
+
+             <b>Comment:</b>
+             {{original.item.comment|default:""|wordwrap:50}}
+
+          {% endif %}
+
+        </p>
+
+      {% endif %}
+
+      {% if original and original.item.related_orders.len > 1 %}
+
+       <h3>Other orders for the same product</h3>
+
+       <p>
+
+        <table cellspacing="0">
+          <thead>
+            <tr>
+              <th>requested</th><th>by</th><th>ordered</th><th>received</th>
+              <th>quantity</th><th>price</th><th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+          {% for order in original.item.related_orders %}
+
+            <tr class="{% cycle 'row1' 'row2' %}">
+    
+              <td><b><a href="{{order.get_absolute_url}}" target="_blank">
+                 {{order.date_created}}</a></b></td>
+              <td>{{order.created_by}}</td>
+              <td>{{order.date_ordered|default:"--"}}</td>
+              <td>{{order.date_received|default:"--"}}</td>
+              <td>{{order.quantity}}</td>
+              <td>{{order.price|default:""}}</td>
+              <td>{{order.status}}</td>
+
+            </tr>
+
+          {% endfor %}
+
+          </tbody>
+        </table>
+        
+      {% else %}
+        <div class="description">
+          <b>No other Orders found for this item.</b></div>
+      {% endif %}
+      
+      </p>
+    
+</div>
+{% endblock %}
