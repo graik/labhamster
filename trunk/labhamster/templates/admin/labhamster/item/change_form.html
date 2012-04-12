@@ -12,6 +12,13 @@
 
       <p></p>
  
+      {% if original %} 
+        <ul class="object-tools">
+          <li><a href="../../order/add/?item={{original.name}}" target="_blank">
+              Add Order</a></li> 
+        </ul>
+      {% endif %}
+      
       {% if original and original.related_orders %}
         <table cellspacing="0">
           <thead>
@@ -45,17 +52,32 @@
       {% else %}
         <div class="description"><b>No Orders found for this item.</b></div>
       {% endif %}
-      
 
       {% if original %} 
-        <ul class="object-tools">
-          <li><a href="../../order/add/?item={{original.name}}" target="_blank">
-              Add Order</a></li> 
-        </ul>
-      {% endif %}
-      
-      <p></p>
+      <p>
+        <div class="description">
+        
+        <b>Go to ... </b>
 
-    
+            {% if original.link|length > 5%}
+                <a href="{{original.link}}" target="_blank">
+                  Product website</a>
+            {% else %}
+                No product web site registered.
+            {% endif %}; 
+            
+            {% if original.vendor.link|length > 5%}
+                <a href="{{original.link}}" target="_blank">
+                  Vendor website</a>
+            {% else %}
+                (No vendor web site registered.)
+            {% endif %}
+
+        </div>
+      </p>
+      {% endif %}
+
+      
 </div>
+
 {% endblock %}
