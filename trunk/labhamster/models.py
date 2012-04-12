@@ -152,7 +152,7 @@ class Item(models.Model):
                                blank=False, 
                                help_text='select normal supplier of this item')
 
-    catalog = models.CharField(max_length=30, unique=False, blank=True, 
+    catalog = models.CharField(max_length=30, unique=False, blank=False, 
                                help_text='catalogue number')
 
     category = models.ForeignKey('Category', verbose_name='Product Category', 
