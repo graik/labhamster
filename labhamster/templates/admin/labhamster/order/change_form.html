@@ -38,7 +38,7 @@
 
       {% endif %}
 
-      {% if original and original.item.related_orders.len > 1 %}
+      {% if original and original.item.related_orders|length > 1 %}
 
        <h3>Other orders for the same product</h3>
 
@@ -54,6 +54,8 @@
           <tbody>
   
           {% for order in original.item.related_orders %}
+          
+            {% if order.id != original.id %}
 
             <tr class="{% cycle 'row1' 'row2' %}">
     
@@ -67,6 +69,8 @@
               <td>{{order.status}}</td>
 
             </tr>
+            {% endif %}
+            
 
           {% endfor %}
 
