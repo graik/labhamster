@@ -106,6 +106,10 @@ class OrderAdmin(admin.ModelAdmin):
 
 
     def make_ordered(self, request, queryset):
+        """
+        Mark several orders as 'ordered'
+        see: https://docs.djangoproject.com/en/1.4/ref/contrib/admin/actions/
+        """
         import datetime
         n = queryset.update(status='ordered', ordered_by=request.user, 
                             date_ordered=datetime.datetime.now())
@@ -140,7 +144,9 @@ class OrderAdmin(admin.ModelAdmin):
     
 
     def make_csv(self, request, queryset):
-        """Export selected orders as CSV file"""
+        """
+        Export selected orders as CSV file
+        """
         import csv
         from collections import OrderedDict
        
