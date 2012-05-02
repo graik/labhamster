@@ -145,7 +145,7 @@ class Order(models.Model):
 
 class Item(models.Model):
     
-    name = models.CharField(max_length=30, unique=True,
+    name = models.CharField(max_length=60, unique=True,
                             help_text='short descriptive name of this item')
     
     vendor = models.ForeignKey('Vendor', verbose_name='Vendor', 
