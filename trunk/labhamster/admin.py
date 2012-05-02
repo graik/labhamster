@@ -170,7 +170,13 @@ class OrderAdmin(admin.ModelAdmin):
         writer.writerow(fields.keys())
 
         for order in queryset:
-            columns = [ eval('order.%s'%value) for name,value in fields.items()]
+            columns = []
+            for name,value in fields.items():
+                try:
+                    columns.append( eval('order.%s'%value) )
+                except:
+                    columns.append("")  ## capture 'None' fields
+
             columns = [ c.encode('utf-8') if type(c) is unicode else c \
                         for c in columns]
                 
