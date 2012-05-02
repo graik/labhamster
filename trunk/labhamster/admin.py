@@ -16,6 +16,8 @@
 
 from labhamster.models import *
 from django.contrib import admin
+from django.http import HttpResponse
+
 admin.site.register(Vendor)
 admin.site.register(Category)
 admin.site.register(Grant)
@@ -95,7 +97,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'date_created'
 
-    actions = ['make_ordered', 'make_received', 'make_cancelled']
+    actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
 
     def truncated_comment(self, obj):
         """shorten comment to 15 characters for table display"""
@@ -135,6 +137,42 @@ class OrderAdmin(admin.ModelAdmin):
         self.message_user(request, '%i orders were set to cancelled' % n)
 
     make_cancelled.short_description = 'Mark selected entries as cancelled'
+    
+
+    def make_csv(self, request, queryset):
+        """Export selected orders as CSV file"""
+        import csv
+        from collections import OrderedDict
+       
+        fields = OrderedDict( [('Item', 'item.name'),
+                               ('Quantity', 'quantity'),
+                               ('Price','price'),
+                               ('Vendor','item.vendor.name'),
+                               ('Catalog','item.catalog'),
+                               ('Requested','date_created'),
+                               ('Requested by','created_by.username'),
+                               ('Ordered','date_ordered'),
+                               ('Ordered by','ordered_by.username'),
+                               ('Received','date_received'),
+                               ('Status','status'),
+                               ('Comment','comment')])
+        
+        response = HttpResponse(mimetype='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=orders.csv'
+        
+        writer = csv.writer(response)
+        writer.writerow(fields.keys())
+
+        for order in queryset:
+            columns = [ eval('order.%s'%value) for name,value in fields.items()]
+            columns = [ c.encode('utf-8') if type(c) is unicode else c \
+                        for c in columns]
+                
+            writer.writerow( columns )
+ 
+        return response
+    
+    make_csv.short_description = 'Export orders as CSV'
 
 
 admin.site.register(Order, OrderAdmin)
