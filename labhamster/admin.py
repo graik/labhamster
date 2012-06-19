@@ -91,7 +91,8 @@ class OrderAdmin(admin.ModelAdmin):
                    'item__category__name', 'item__vendor__name', 'created_by')
     ordering = ('-date_created', 'item', 'quantity')
 
-    search_fields = ('comment', 'grant__name', 'grant__grant_id')
+    search_fields = ('comment', 'grant__name', 'grant__grant_id', 'item__name', 
+                     'item__vendor__name')
 
     save_as = True
 
