@@ -87,8 +87,8 @@ class OrderAdmin(admin.ModelAdmin):
     
     list_display = ('item', 'quantity', 'Price', 'requested', 'ordered', 
                     'received', 'truncated_comment', 'Status')
-    list_filter = ('status', 'ordered_by', 
-                   'item__category__name', 'item__vendor__name', 'created_by')
+    list_filter = ('status', 
+                   'item__category__name', 'created_by', 'item__vendor__name' )
     ordering = ('-date_created', 'item', 'quantity')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'item__name', 
