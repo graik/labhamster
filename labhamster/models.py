@@ -170,7 +170,7 @@ class Item(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='out')
 
-    link = models.URLField(verify_exists=True, blank=True, 
+    link = models.URLField(verify_exists=False, blank=True, 
                            help_text='URL Link to product description')
 
     comment = models.TextField('comments & description', blank=True, 
