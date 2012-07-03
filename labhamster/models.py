@@ -24,6 +24,7 @@ APP_URL = '/admin/labhamster'
 class Order(models.Model):
     STATUS_TYPES = (('draft', 'draft'),
                     ('pending', 'pending'),
+                    ('quote', 'quote requested'),
                     ('ordered', 'ordered'),
                     ('received', 'received'),
                     ('cancelled', 'cancelled'))
@@ -55,12 +56,15 @@ class Order(models.Model):
                 help_text='Click the magnifying lens to select from the list of existing items.\n'+\
                 'For a new item, first click the lens, then click "Add Item" and fill out and save the Item form.' )
 
-    unit_size = models.IntegerField(default=1)
+    unit_size = models.CharField(max_length=20, blank=True, null=True,
+                                 help_text='e.g. "1 pack", "10 l", "1 kg", "500 tips"')
 
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=1, 
+                                   help_text='number of units ordered')
 
     price = models.DecimalField(max_digits=6, decimal_places=2, 
-                                blank=True, null=True)
+                                blank=True, null=True,
+                                help_text='total cost')
 
     grant_category = models.CharField('Grant category', 
                                       choices=(('consumables', 'consumables'), 
