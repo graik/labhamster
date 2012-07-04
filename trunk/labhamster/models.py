@@ -132,19 +132,19 @@ class Order(models.Model):
         return u''
 
     received.allow_tags = True
-    received.admin_order_field = 'date_ordered'
+    received.admin_order_field = 'date_received'
 
     def Price(self):
         """filter '(None)' display in admin table"""
         if self.price:
-            return '%7.2f' % self.price
+            return u'%7.2f' % self.price
         return u''
 
-    received.allow_tags = True
-    received.admin_order_field = 'date_ordered'
+    Price.allow_tags = True
+    Price.admin_order_field = 'price'
 
     class Meta:
-        ordering = ('date_created',)
+        ordering = ('date_created','id')
 
 
 class Item(models.Model):
