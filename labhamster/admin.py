@@ -18,9 +18,21 @@ from labhamster.models import *
 from django.contrib import admin
 from django.http import HttpResponse
 
-admin.site.register(Vendor)
-admin.site.register(Category)
-admin.site.register(Grant)
+class GrantAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+
+admin.site.register(Grant, GrantAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+
+admin.site.register(Category, CategoryAdmin)
+
+
+class VendorAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+
+admin.site.register(Vendor, VendorAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': (('name', 'category'),
