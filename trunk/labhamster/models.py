@@ -244,6 +244,9 @@ class Vendor(models.Model):
     contact = models.CharField(max_length=30, blank=True, 
                                verbose_name='Contact name')
 
+    class Meta:
+        ordering = ('name',)
+
     def __unicode__(self):
         return self.name
 
