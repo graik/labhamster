@@ -41,6 +41,9 @@ class Order(models.Model):
     date_received = models.DateField('received', blank=True, null=True, 
                                      help_text='Date when item was received')
 
+    ## recent Django Admin version do not sort users any longer
+    ## workaround with custom form:
+    ## https://code.djangoproject.com/ticket/8220
     created_by = models.ForeignKey(User, null=False, blank=False, db_index=True, 
                                    verbose_name='requested by', 
                                    related_name='requests', 
