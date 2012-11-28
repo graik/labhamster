@@ -31,13 +31,14 @@ admin.site.register(Category, CategoryAdmin)
 
 class VendorAdmin(admin.ModelAdmin):
 
-    fieldsets = ((None, {'fields': (('name', 'link'),)}),
+    fieldsets = ((None, {'fields': (('name',),
+                                    ('link', 'login', 'password'),)}),
                  ('Contact', {'fields' : (('contact',),
                                           ('email','phone'),)})
                  )
 
 
-    list_display = ('name', 'link')
+    list_display = ('name', 'link', 'login', 'password')
 
     ordering = ('name',)
     search_fields = ('name', 'contact')
