@@ -30,7 +30,17 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class VendorAdmin(admin.ModelAdmin):
+
+    fieldsets = ((None, {'fields': (('name', 'link'),)}),
+                 ('Contact', {'fields' : (('contact',),
+                                          ('email','phone'),)})
+                 )
+
+
+    list_display = ('name', 'link')
+
     ordering = ('name',)
+    search_fields = ('name', 'contact')
 
 admin.site.register(Vendor, VendorAdmin)
 
