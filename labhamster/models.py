@@ -239,13 +239,19 @@ class Vendor(models.Model):
                            help_text='URL Link to Vendor home page')
 
     phone = models.CharField(max_length=20, blank=True, 
-                             verbose_name='Contact phone')
+                             verbose_name='Phone')
 
     email = models.CharField(max_length=30, blank=True, 
-                             verbose_name='Contact e-mail')
+                             verbose_name='E-mail')
 
     contact = models.CharField(max_length=30, blank=True, 
-                               verbose_name='Contact name')
+                               verbose_name='Primary contact name')
+    
+    login = models.CharField(max_length=50, blank=True,
+                               verbose_name='Account Login')
+
+    password = models.CharField(max_length=30, blank=True,
+                               verbose_name='Password')
 
     class Meta:
         ordering = ('name',)
