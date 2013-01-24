@@ -60,14 +60,14 @@ class Order(models.Model):
                 'For a new item, first click the lens, then click "Add Item" and fill out and save the Item form.' )
 
     unit_size = models.CharField(max_length=20, blank=True, null=True,
-                                 help_text='e.g. "1 pack", "10 l", "1 kg", "500 tips"')
+                                 help_text='e.g. "10 l", "1 kg", "500 tips"')
 
     quantity = models.IntegerField(default=1, 
                                    help_text='number of units ordered')
 
-    price = models.DecimalField(max_digits=6, decimal_places=2, 
+    price = models.DecimalField('Unit price', max_digits=6, decimal_places=2, 
                                 blank=True, null=True,
-                                help_text='total cost')
+                                help_text='cost per unit (!)')
 
     grant_category = models.CharField('Grant category', 
                                       choices=(('consumables', 'consumables'), 
@@ -144,6 +144,7 @@ class Order(models.Model):
         return u''
 
     Price.allow_tags = True
+    Price.short_description = 'Unit price'
     Price.admin_order_field = 'price'
 
     class Meta:
