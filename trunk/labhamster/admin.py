@@ -18,6 +18,36 @@ from labhamster.models import *
 from django.contrib import admin
 from django.http import HttpResponse
 
+def export_csv(request, queryset, fields):
+    """
+    Helper method for Admin make_csv action. Exports selected objects as 
+    CSV file.
+    fields - OrderedDict of name / field pairs, see Item.make_csv for example
+    """
+    import csv
+
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=orders.csv'
+    
+    writer = csv.writer(response)
+    writer.writerow(fields.keys())
+
+    for o in queryset:
+        columns = []
+        for name,value in fields.items():
+            try:
+                columns.append( eval('o.%s'%value) )
+            except:
+                columns.append("")  ## capture 'None' fields
+
+        columns = [ c.encode('utf-8') if type(c) is unicode else c \
+                    for c in columns]
+            
+        writer.writerow( columns )
+
+    return response
+    
+
 class GrantAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
@@ -63,7 +93,8 @@ class ItemAdmin(admin.ModelAdmin):
     actions = ['make_ok',
                'make_low',
                'make_out',
-               'mark_deprecated']
+               'make_deprecated',
+               'make_csv']
 
     def make_ok(self, request, queryset):
         n = queryset.update(status='ok')
@@ -88,9 +119,25 @@ class ItemAdmin(admin.ModelAdmin):
         self.message_user(request, '%i items were updated' % n)
 
     make_deprecated.short_description = 'Mark selected entries as deprecated'
-
+    
+    def make_csv(self, request, queryset):
+        from collections import OrderedDict
+        
+        fields = OrderedDict( [('Name', 'name'),
+                               ('Vendor', 'vendor.name'),
+                               ('Catalog','catalog'),
+                               ('Category','category.name'),
+                               ('Shelf_life','shelflife'),
+                               ('Status','status'),
+                               ('Location','location'),
+                               ('Link','link'),
+                               ('Comment','comment')])
+        return export_csv( request, queryset, fields)
+    
+    make_csv.short_description = 'Export items as CSV'
 
 admin.site.register(Item, ItemAdmin)
+
 
 class OrderAdmin(admin.ModelAdmin):
     
@@ -111,7 +158,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('item', 'quantity', 'Price', 'requested', 'ordered', 
                     'received', 'truncated_comment', 'Status')
     list_filter = ('status', 
-                   'item__category__name', 'created_by', 'item__vendor__name' )
+                   'item__category__name', 'created_by', 'item__vendor__name',
+                   'grant')
     ordering = ('-date_created', 'item', 'quantity')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'item__name', 
@@ -171,7 +219,6 @@ class OrderAdmin(admin.ModelAdmin):
         """
         Export selected orders as CSV file
         """
-        import csv
         from collections import OrderedDict
        
         fields = OrderedDict( [('Item', 'item.name'),
@@ -187,26 +234,7 @@ class OrderAdmin(admin.ModelAdmin):
                                ('Status','status'),
                                ('Comment','comment')])
         
-        response = HttpResponse(mimetype='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=orders.csv'
-        
-        writer = csv.writer(response)
-        writer.writerow(fields.keys())
-
-        for order in queryset:
-            columns = []
-            for name,value in fields.items():
-                try:
-                    columns.append( eval('order.%s'%value) )
-                except:
-                    columns.append("")  ## capture 'None' fields
-
-            columns = [ c.encode('utf-8') if type(c) is unicode else c \
-                        for c in columns]
-                
-            writer.writerow( columns )
- 
-        return response
+        return export_csv(request, queryset, fields)
     
     make_csv.short_description = 'Export orders as CSV'
 
