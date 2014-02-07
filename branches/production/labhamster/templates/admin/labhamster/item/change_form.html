@@ -1,0 +1,83 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_modify %}
+
+
+{% block after_field_sets %}
+
+<div class="module aligned">
+  <h2>Orders</h2>
+      <div class="description">
+        Note, clicking any of the links below will open a new window/tab!
+      </div>
+
+      <p></p>
+ 
+      {% if original %} 
+        <ul class="object-tools">
+          <li><a href="../../order/add/?item={{original.id}}" target="_blank">
+              Add Order</a></li> 
+        </ul>
+      {% endif %}
+      
+      {% if original and original.related_orders %}
+        <table cellspacing="0">
+          <thead>
+            <tr>
+              <th>requested</th><th>by</th><th>ordered</th><th>received</th>
+              <th>quantity</th><th>price</th><th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+          {% for order in original.related_orders %}
+
+            <tr class="{% cycle 'row1' 'row2' %}">
+    
+              <td><b><a href="../../{{order.get_relative_url}}" target="_blank">
+                 {{order.date_created}}</a></b></td>
+              <td>{{order.created_by}}</td>
+              <td>{{order.date_ordered|default:"--"}}</td>
+              <td>{{order.date_received|default:"--"}}</td>
+              <td>{{order.quantity}}</td>
+              <td>{{order.price|default:""}}</td>
+              <td>{{order.status}}</td>
+
+            </tr>
+
+          {% endfor %}
+
+          </tbody>
+        </table>
+        
+      {% else %}
+        <div class="description"><b>No Orders found for this item.</b></div>
+      {% endif %}
+
+      {% if original %} 
+      <p>
+        <div class="description">
+        
+        <b>Go to ... </b>
+
+            {% if original.link|length > 5%}
+                <a href="{{original.link}}" target="_blank">
+                  Product website</a>
+            {% else %}
+                No product web site registered.
+            {% endif %}; 
+            
+            {% if original.vendor.link|length > 5%}
+                <a href="{{original.link}}" target="_blank">
+                  Vendor website</a>
+            {% else %}
+                (No vendor web site registered.)
+            {% endif %}
+
+        </div>
+      </p>
+      {% endif %}
+
+      
+</div>
+
+{% endblock %}

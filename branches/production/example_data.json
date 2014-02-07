@@ -1,0 +1,328 @@
+[
+    {
+        "pk": 1,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "ordered",
+            "comment": "",
+            "grant": null,
+            "date_ordered": "2012-03-16",
+            "grant_category": "consumables",
+            "created_by": 1,
+            "date_received": null,
+            "item": 4,
+            "ordered_by": 2,
+            "date_created": "2012-03-12",
+            "unit_size": 1,
+            "price": "100",
+            "quantity": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "ordered",
+            "comment": "",
+            "grant": null,
+            "date_ordered": "2012-03-15",
+            "grant_category": "consumables",
+            "created_by": 1,
+            "date_received": null,
+            "item": 3,
+            "ordered_by": 1,
+            "date_created": "2012-03-12",
+            "unit_size": 1,
+            "price": "12",
+            "quantity": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "received",
+            "comment": "",
+            "grant": 1,
+            "date_ordered": "2012-03-12",
+            "grant_category": "consumables",
+            "created_by": 1,
+            "date_received": "2012-03-13",
+            "item": 2,
+            "ordered_by": 1,
+            "date_created": "2012-03-12",
+            "unit_size": 1,
+            "price": "100",
+            "quantity": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "ordered",
+            "comment": "We need even more",
+            "grant": 1,
+            "date_ordered": "2012-03-13",
+            "grant_category": "consumables",
+            "created_by": 1,
+            "date_received": null,
+            "item": 2,
+            "ordered_by": 1,
+            "date_created": "2012-03-13",
+            "unit_size": 1,
+            "price": "24.45",
+            "quantity": 5
+        }
+    },
+    {
+        "pk": 6,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "received",
+            "comment": "Can also be purchased from Fisher Scientific",
+            "grant": null,
+            "date_ordered": "2012-03-16",
+            "grant_category": "consumables",
+            "created_by": 2,
+            "date_received": "2012-03-16",
+            "item": 5,
+            "ordered_by": 2,
+            "date_created": "2012-03-16",
+            "unit_size": 10,
+            "price": "98",
+            "quantity": 1
+        }
+    },
+    {
+        "pk": 7,
+        "model": "labhamster.order",
+        "fields": {
+            "status": "received",
+            "comment": "very urgent",
+            "grant": null,
+            "date_ordered": "2012-03-16",
+            "grant_category": "consumables",
+            "created_by": 2,
+            "date_received": "2012-03-16",
+            "item": 6,
+            "ordered_by": 2,
+            "date_created": "2012-03-16",
+            "unit_size": 1,
+            "price": "19",
+            "quantity": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 1,
+            "status": "ok",
+            "vendor": 4,
+            "name": "GelX E-Gel ",
+            "comment": "",
+            "catalog": "VXG401001",
+            "shelflife": 180,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 6,
+            "status": "ok",
+            "vendor": 5,
+            "name": "Oligo Numeer 10",
+            "comment": "",
+            "catalog": "",
+            "shelflife": null,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 1,
+            "status": "ok",
+            "vendor": 2,
+            "name": "Pipette tips 200 ul",
+            "comment": "",
+            "catalog": "",
+            "shelflife": 10,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 3,
+            "status": "out",
+            "vendor": 3,
+            "name": "antibody mouse anti-HIS",
+            "comment": "",
+            "catalog": "",
+            "shelflife": 11,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 1,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 1,
+            "status": "low",
+            "vendor": 1,
+            "name": "gloves XL",
+            "comment": "",
+            "catalog": "",
+            "shelflife": null,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "labhamster.item",
+        "fields": {
+            "category": 2,
+            "status": "out",
+            "vendor": 2,
+            "name": "paper for printer",
+            "comment": "",
+            "catalog": "",
+            "shelflife": 30,
+            "link": "",
+            "location": ""
+        }
+    },
+    {
+        "pk": 1,
+        "model": "labhamster.vendor",
+        "fields": {
+            "phone": "",
+            "contact": "",
+            "link": "",
+            "name": "Fisher Scientific",
+            "email": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "labhamster.vendor",
+        "fields": {
+            "phone": "",
+            "contact": "",
+            "link": "",
+            "name": "VWR Canada",
+            "email": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "labhamster.vendor",
+        "fields": {
+            "phone": "",
+            "contact": "",
+            "link": "",
+            "name": "Qiagen",
+            "email": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "labhamster.vendor",
+        "fields": {
+            "phone": "",
+            "contact": "",
+            "link": "",
+            "name": "Invitrogen",
+            "email": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "labhamster.vendor",
+        "fields": {
+            "phone": "",
+            "contact": "",
+            "link": "",
+            "name": "fancy vendor",
+            "email": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "antibodies"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "fancy primer"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "lab consumables"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "office supplies"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "primers"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "services"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "labhamster.category",
+        "fields": {
+            "name": "synthetic DNA"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "labhamster.grant",
+        "fields": {
+            "comment": "",
+            "grant_id": "",
+            "name": "Genome Quebec"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "labhamster.grant",
+        "fields": {
+            "comment": "",
+            "grant_id": "123",
+            "name": "NIH"
+        }
+    }
+]
