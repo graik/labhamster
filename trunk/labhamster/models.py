@@ -178,7 +178,7 @@ class Item(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='out')
 
-    link = models.URLField(verify_exists=False, blank=True, 
+    link = models.URLField(blank=True, 
                            help_text='URL Link to product description')
 
     comment = models.TextField('comments & description', blank=True, 
@@ -236,7 +236,7 @@ class Vendor(models.Model):
                             verbose_name='Vendor name', 
                             help_text='short descriptive name of this supplier')
 
-    link = models.URLField(verify_exists=True, blank=True, 
+    link = models.URLField(blank=True, 
                            help_text='URL Link to Vendor home page')
 
     phone = models.CharField(max_length=20, blank=True, 
@@ -301,3 +301,4 @@ class Grant(models.Model):
 
     class Meta:
         ordering = ('name', 'grant_id')
+        verbose_name = 'Grant'

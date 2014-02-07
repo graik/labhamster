@@ -17,6 +17,8 @@
 '''
 Alternative settings file geared towards a postgresql + apache installation.
 Modify and use instead of the default settings.py.
+
+NOTE: This is based on a django 1.3.1 settings.py;
 '''
 
 DEBUG = True

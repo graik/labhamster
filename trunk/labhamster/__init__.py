@@ -13,4 +13,13 @@
 
 ## You should have received a copy of the GNU Affero General Public
 ## License along with labhamster. If not, see <http://www.gnu.org/licenses/>.
+VERSION = (1,0,0)
 
+__version__ = '.'.join([ str(i) for i in VERSION])
+
+import os.path as osp
+import sys
+
+project_root = osp.abspath( osp.split( osp.abspath(__file__) )[0] + '/../' )
+
+sys.path.append( osp.join( project_root, 'thirdparty'))
