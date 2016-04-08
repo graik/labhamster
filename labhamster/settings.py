@@ -20,7 +20,7 @@ ADMINS = ()
 MANAGERS = ADMINS
 
 DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3',
-             'NAME': '/home/raik/data/py/labhamsterproject/labhamster.db',
+            'NAME': '/home/raik/data/py/labhamsterproject/labhamster.db',
              'USER': '',
              'PASSWORD': '',
              'HOST': '',
@@ -66,8 +66,7 @@ INSTALLED_APPS = ('django.contrib.admin',
                   'django.contrib.sites',
                   'django.contrib.messages',
                   'django.contrib.staticfiles',
-                  'labhamster',
-                  'south')
+                  'labhamster')
 
 LOGGING = {'version': 1,
            'disable_existing_loggers': False,
