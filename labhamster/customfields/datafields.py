@@ -189,9 +189,21 @@ class DayModelField(models.Field):
         defaults.update(**kwargs)
         
         return super(DayModelField, self).formfield(**defaults)
+    
+    def deconstruct(self):
+        """
+        Required for migrations support
+        https://docs.djangoproject.com/en/1.9/howto/custom-model-fields/#custom-field-deconstruct-method
+        """
+        name, path, args, kwargs = super(DayModelField, self).deconstruct()
+        if self.unitchoice != self.conversion['days']:
+            backconversion = dict(zip(self.conversion.values(), self.conversion.keys()))
+            kwargs['unit'] = backconversion.get(self.unitchoice, None)
+        return name, path, args, kwargs
 
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^labhamster\.customfields\.datafields\.DayModelField"])
+    ## replaced by deconstruct() in django v1.7+ 
+    ##from south.modelsinspector import add_introspection_rules
+    ##add_introspection_rules([], ["^labhamster\.customfields\.datafields\.DayModelField"])
 
 if __name__ == '__main__':
     pass
