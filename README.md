@@ -5,7 +5,8 @@ Labhamster is a simple Django project for tracking materials and reagents ordere
 and offers a rudimentary inventory management. For now it is not much more than the out-of-the-box Django 
 admin interface with a pretty standard data model.
 
-## Installation Instructions for quick evaluation, debugging & development
+### Installation Instructions
+(for quick evaluation, debugging & development)
 
 Download, prepare virtual python environment and install dependencies:
 ```
