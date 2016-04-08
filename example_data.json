@@ -1,328 +1,826 @@
 [
-    {
-        "pk": 1,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "ordered",
-            "comment": "",
-            "grant": null,
-            "date_ordered": "2012-03-16",
-            "grant_category": "consumables",
-            "created_by": 1,
-            "date_received": null,
-            "item": 4,
-            "ordered_by": 2,
-            "date_created": "2012-03-12",
-            "unit_size": 1,
-            "price": "100",
-            "quantity": 1
-        }
-    },
-    {
-        "pk": 2,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "ordered",
-            "comment": "",
-            "grant": null,
-            "date_ordered": "2012-03-15",
-            "grant_category": "consumables",
-            "created_by": 1,
-            "date_received": null,
-            "item": 3,
-            "ordered_by": 1,
-            "date_created": "2012-03-12",
-            "unit_size": 1,
-            "price": "12",
-            "quantity": 1
-        }
-    },
-    {
-        "pk": 3,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "received",
-            "comment": "",
-            "grant": 1,
-            "date_ordered": "2012-03-12",
-            "grant_category": "consumables",
-            "created_by": 1,
-            "date_received": "2012-03-13",
-            "item": 2,
-            "ordered_by": 1,
-            "date_created": "2012-03-12",
-            "unit_size": 1,
-            "price": "100",
-            "quantity": 1
-        }
-    },
-    {
-        "pk": 5,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "ordered",
-            "comment": "We need even more",
-            "grant": 1,
-            "date_ordered": "2012-03-13",
-            "grant_category": "consumables",
-            "created_by": 1,
-            "date_received": null,
-            "item": 2,
-            "ordered_by": 1,
-            "date_created": "2012-03-13",
-            "unit_size": 1,
-            "price": "24.45",
-            "quantity": 5
-        }
-    },
-    {
-        "pk": 6,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "received",
-            "comment": "Can also be purchased from Fisher Scientific",
-            "grant": null,
-            "date_ordered": "2012-03-16",
-            "grant_category": "consumables",
-            "created_by": 2,
-            "date_received": "2012-03-16",
-            "item": 5,
-            "ordered_by": 2,
-            "date_created": "2012-03-16",
-            "unit_size": 10,
-            "price": "98",
-            "quantity": 1
-        }
-    },
-    {
-        "pk": 7,
-        "model": "labhamster.order",
-        "fields": {
-            "status": "received",
-            "comment": "very urgent",
-            "grant": null,
-            "date_ordered": "2012-03-16",
-            "grant_category": "consumables",
-            "created_by": 2,
-            "date_received": "2012-03-16",
-            "item": 6,
-            "ordered_by": 2,
-            "date_created": "2012-03-16",
-            "unit_size": 1,
-            "price": "19",
-            "quantity": 1
-        }
-    },
-    {
-        "pk": 5,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 1,
-            "status": "ok",
-            "vendor": 4,
-            "name": "GelX E-Gel ",
-            "comment": "",
-            "catalog": "VXG401001",
-            "shelflife": 180,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 6,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 6,
-            "status": "ok",
-            "vendor": 5,
-            "name": "Oligo Numeer 10",
-            "comment": "",
-            "catalog": "",
-            "shelflife": null,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 2,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 1,
-            "status": "ok",
-            "vendor": 2,
-            "name": "Pipette tips 200 ul",
-            "comment": "",
-            "catalog": "",
-            "shelflife": 10,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 3,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 3,
-            "status": "out",
-            "vendor": 3,
-            "name": "antibody mouse anti-HIS",
-            "comment": "",
-            "catalog": "",
-            "shelflife": 11,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 1,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 1,
-            "status": "low",
-            "vendor": 1,
-            "name": "gloves XL",
-            "comment": "",
-            "catalog": "",
-            "shelflife": null,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 4,
-        "model": "labhamster.item",
-        "fields": {
-            "category": 2,
-            "status": "out",
-            "vendor": 2,
-            "name": "paper for printer",
-            "comment": "",
-            "catalog": "",
-            "shelflife": 30,
-            "link": "",
-            "location": ""
-        }
-    },
-    {
-        "pk": 1,
-        "model": "labhamster.vendor",
-        "fields": {
-            "phone": "",
-            "contact": "",
-            "link": "",
-            "name": "Fisher Scientific",
-            "email": ""
-        }
-    },
-    {
-        "pk": 2,
-        "model": "labhamster.vendor",
-        "fields": {
-            "phone": "",
-            "contact": "",
-            "link": "",
-            "name": "VWR Canada",
-            "email": ""
-        }
-    },
-    {
-        "pk": 3,
-        "model": "labhamster.vendor",
-        "fields": {
-            "phone": "",
-            "contact": "",
-            "link": "",
-            "name": "Qiagen",
-            "email": ""
-        }
-    },
-    {
-        "pk": 4,
-        "model": "labhamster.vendor",
-        "fields": {
-            "phone": "",
-            "contact": "",
-            "link": "",
-            "name": "Invitrogen",
-            "email": ""
-        }
-    },
-    {
-        "pk": 5,
-        "model": "labhamster.vendor",
-        "fields": {
-            "phone": "",
-            "contact": "",
-            "link": "",
-            "name": "fancy vendor",
-            "email": ""
-        }
-    },
-    {
-        "pk": 3,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "antibodies"
-        }
-    },
-    {
-        "pk": 6,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "fancy primer"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "lab consumables"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "office supplies"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "primers"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "services"
-        }
-    },
-    {
-        "pk": 5,
-        "model": "labhamster.category",
-        "fields": {
-            "name": "synthetic DNA"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "labhamster.grant",
-        "fields": {
-            "comment": "",
-            "grant_id": "",
-            "name": "Genome Quebec"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "labhamster.grant",
-        "fields": {
-            "comment": "",
-            "grant_id": "123",
-            "name": "NIH"
-        }
+{
+    "model": "labhamster.item",
+    "pk": 1,
+    "fields": {
+        "name": "gloves XL",
+        "vendor": 1,
+        "catalog": "",
+        "category": 1,
+        "shelflife": null,
+        "status": "low",
+        "link": "",
+        "comment": "",
+        "location": ""
     }
+},
+{
+    "model": "labhamster.item",
+    "pk": 2,
+    "fields": {
+        "name": "Pipette tips 200 ul",
+        "vendor": 2,
+        "catalog": "",
+        "category": 1,
+        "shelflife": 10,
+        "status": "ok",
+        "link": "",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.item",
+    "pk": 3,
+    "fields": {
+        "name": "antibody mouse anti-HIS",
+        "vendor": 3,
+        "catalog": "123456789",
+        "category": 3,
+        "shelflife": 11,
+        "status": "ok",
+        "link": "",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.item",
+    "pk": 4,
+    "fields": {
+        "name": "paper for printer",
+        "vendor": 2,
+        "catalog": "1234567",
+        "category": 2,
+        "shelflife": 30,
+        "status": "ok",
+        "link": "",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.item",
+    "pk": 5,
+    "fields": {
+        "name": "GelX E-Gel",
+        "vendor": 4,
+        "catalog": "VXG401001",
+        "category": 1,
+        "shelflife": 180,
+        "status": "low",
+        "link": "",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.item",
+    "pk": 6,
+    "fields": {
+        "name": "Oligo Numeer 10",
+        "vendor": 5,
+        "catalog": "0123456789",
+        "category": 4,
+        "shelflife": null,
+        "status": "out",
+        "link": "",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 1,
+    "fields": {
+        "name": "Fisher Scientific",
+        "link": "",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 2,
+    "fields": {
+        "name": "VWR Canada",
+        "link": "",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 3,
+    "fields": {
+        "name": "Qiagen",
+        "link": "",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 4,
+    "fields": {
+        "name": "Invitrogen",
+        "link": "",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 5,
+    "fields": {
+        "name": "Oligarchic Inc.",
+        "link": "",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 1,
+    "fields": {
+        "name": "lab consumables"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 2,
+    "fields": {
+        "name": "office supplies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 3,
+    "fields": {
+        "name": "antibodies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 4,
+    "fields": {
+        "name": "primers"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 5,
+    "fields": {
+        "name": "synthetic DNA"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 7,
+    "fields": {
+        "name": "services"
+    }
+},
+{
+    "model": "labhamster.grant",
+    "pk": 1,
+    "fields": {
+        "name": "Genome Quebec",
+        "grant_id": "",
+        "comment": ""
+    }
+},
+{
+    "model": "labhamster.grant",
+    "pk": 2,
+    "fields": {
+        "name": "NIH",
+        "grant_id": "123",
+        "comment": ""
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add order",
+        "content_type": [
+            "labhamster",
+            "order"
+        ],
+        "codename": "add_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change order",
+        "content_type": [
+            "labhamster",
+            "order"
+        ],
+        "codename": "change_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete order",
+        "content_type": [
+            "labhamster",
+            "order"
+        ],
+        "codename": "delete_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add item",
+        "content_type": [
+            "labhamster",
+            "item"
+        ],
+        "codename": "add_item"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change item",
+        "content_type": [
+            "labhamster",
+            "item"
+        ],
+        "codename": "change_item"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete item",
+        "content_type": [
+            "labhamster",
+            "item"
+        ],
+        "codename": "delete_item"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add vendor",
+        "content_type": [
+            "labhamster",
+            "vendor"
+        ],
+        "codename": "add_vendor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change vendor",
+        "content_type": [
+            "labhamster",
+            "vendor"
+        ],
+        "codename": "change_vendor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete vendor",
+        "content_type": [
+            "labhamster",
+            "vendor"
+        ],
+        "codename": "delete_vendor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add category",
+        "content_type": [
+            "labhamster",
+            "category"
+        ],
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change category",
+        "content_type": [
+            "labhamster",
+            "category"
+        ],
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete category",
+        "content_type": [
+            "labhamster",
+            "category"
+        ],
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Grant",
+        "content_type": [
+            "labhamster",
+            "grant"
+        ],
+        "codename": "add_grant"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Grant",
+        "content_type": [
+            "labhamster",
+            "grant"
+        ],
+        "codename": "change_grant"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Grant",
+        "content_type": [
+            "labhamster",
+            "grant"
+        ],
+        "codename": "delete_grant"
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$K6BdhN5Dsk1B$oZAlHmu75wtVAz1cnZflUr/CKcFMfHOeJGgJRh7JVJw=",
+        "last_login": "2016-04-08T21:09:17.701Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "r@g.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-08T21:08:47.259Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$cOwmGX4no0uQ$b2sbBcmf1WBWl6Fdo1Ze+9xug/LUE+dj2ZeMlf5O2TI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "raik",
+        "first_name": "Raik",
+        "last_name": "Gruenberg",
+        "email": "raik.gruenberg@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-08T21:10:11Z",
+        "groups": [],
+        "user_permissions": [
+            [
+                "add_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "change_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "delete_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "add_grant",
+                "labhamster",
+                "grant"
+            ],
+            [
+                "change_grant",
+                "labhamster",
+                "grant"
+            ],
+            [
+                "delete_grant",
+                "labhamster",
+                "grant"
+            ],
+            [
+                "add_item",
+                "labhamster",
+                "item"
+            ],
+            [
+                "change_item",
+                "labhamster",
+                "item"
+            ],
+            [
+                "delete_item",
+                "labhamster",
+                "item"
+            ],
+            [
+                "add_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "change_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "delete_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "add_vendor",
+                "labhamster",
+                "vendor"
+            ],
+            [
+                "change_vendor",
+                "labhamster",
+                "vendor"
+            ],
+            [
+                "delete_vendor",
+                "labhamster",
+                "vendor"
+            ]
+        ]
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 1,
+    "fields": {
+        "status": "received",
+        "date_created": "2012-03-12",
+        "date_ordered": "2012-03-16",
+        "date_received": "2012-03-25",
+        "created_by": [
+            "admin"
+        ],
+        "ordered_by": [
+            "raik"
+        ],
+        "item": 4,
+        "unit_size": "1",
+        "quantity": 1,
+        "price": "100.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": ""
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 2,
+    "fields": {
+        "status": "received",
+        "date_created": "2012-03-12",
+        "date_ordered": "2012-03-15",
+        "date_received": "2012-03-29",
+        "created_by": [
+            "admin"
+        ],
+        "ordered_by": [
+            "raik"
+        ],
+        "item": 3,
+        "unit_size": "1",
+        "quantity": 1,
+        "price": "12.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": ""
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 3,
+    "fields": {
+        "status": "received",
+        "date_created": "2012-03-12",
+        "date_ordered": "2012-03-12",
+        "date_received": "2012-03-13",
+        "created_by": [
+            "admin"
+        ],
+        "ordered_by": [
+            "admin"
+        ],
+        "item": 2,
+        "unit_size": "1",
+        "quantity": 1,
+        "price": "31.00",
+        "grant_category": "consumables",
+        "grant": 1,
+        "comment": ""
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 5,
+    "fields": {
+        "status": "ordered",
+        "date_created": "2012-03-13",
+        "date_ordered": "2012-03-15",
+        "date_received": null,
+        "created_by": [
+            "admin"
+        ],
+        "ordered_by": [
+            "raik"
+        ],
+        "item": 2,
+        "unit_size": "1",
+        "quantity": 5,
+        "price": "24.45",
+        "grant_category": "consumables",
+        "grant": 1,
+        "comment": "We need even more"
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 6,
+    "fields": {
+        "status": "pending",
+        "date_created": "2012-03-16",
+        "date_ordered": null,
+        "date_received": null,
+        "created_by": [
+            "raik"
+        ],
+        "ordered_by": null,
+        "item": 5,
+        "unit_size": "10",
+        "quantity": 1,
+        "price": "98.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": "Can also be purchased from Fisher Scientific"
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 7,
+    "fields": {
+        "status": "ordered",
+        "date_created": "2012-03-16",
+        "date_ordered": "2012-03-17",
+        "date_received": null,
+        "created_by": [
+            "raik"
+        ],
+        "ordered_by": [
+            "raik"
+        ],
+        "item": 6,
+        "unit_size": "1",
+        "quantity": 1,
+        "price": "19.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": "very urgent"
+    }
+}
 ]
