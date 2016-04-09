@@ -1,0 +1,38 @@
+#!wing
+#!version=5.0
+##################################################################
+# Wing IDE project file                                          #
+##################################################################
+[project attributes]
+debug.launch-configs = (1,
+                        {'launch-HuTbEpEIYCRU8vvM': ({},
+        {'buildcmd': ('project',
+                      ('',
+                       '')),
+         'env': ('project',
+                 []),
+         'name': u'Launch manage.py',
+         'pyexec': ('project',
+                    ''),
+         'pypath': ('project',
+                    ''),
+         'pyrunargs': ('project',
+                       '-u'),
+         'runargs': 'runserver --noreload 8000',
+         'rundir': ('project',
+                    '')})})
+proj.debug-sub-processes = True
+proj.directory-list = [{'dirloc': loc('.'),
+                        'excludes': [u'labhamster/templates/admin/index.html',
+                                     u'env'],
+                        'filter': '*',
+                        'include_hidden': False,
+                        'recursive': True,
+                        'watch_for_changes': True}]
+proj.file-list = [loc('labhamster/templates/admin/index.html')]
+proj.file-type = 'shared'
+proj.launch-config = {loc('manage.py'): ('custom',
+        (u'',
+         'launch-HuTbEpEIYCRU8vvM'))}
+proj.main-file = loc('manage.py')
+testing.test-framework = {loc('manage.py'): ':internal djangotest'}
