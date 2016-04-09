@@ -1,3 +1,7 @@
+venv
+*wpu
+*sqlite3
+
 *.py[cod]
 
 # C extensions
