@@ -1,12 +1,28 @@
-# labhamster
-Django project for simple purchase / order management in scientific labs
+# labhamster 
 
-Labhamster is a simple Django project for tracking materials and reagents ordered for a scientific laboratory 
-and offers a rudimentary inventory management. For now it is not much more than the out-of-the-box Django 
-admin interface with a pretty standard data model.
+Django project for simple purchase / order management, mostly targetted at
+scientific labs. However, the work flow is very simple and generic:
 
-### Installation Instructions
-(for quick evaluation, debugging & development)
+   1. User A registers a product.
+   2. User A or B creates an order for this product (status="pending").
+   3. User C initiates the purchase (status="ordered")
+   4. Whoever collects the item, sets the order status to "received".
+
+The advantage for users A and B is that they can quickly figure out what the
+state of their request is and that they, later, can quickly initiate
+follow-up orders for the same product. The advantage for the purchase manager
+C is that all the order requests are collected in one place, catalogue
+numbers are required and prices or links as well as comments can be provided
+by the user. There is a trail of who requested, who ordered and who received
+an item and when. Filtering and full-text search facilitate finding products
+or past orders. Products can be categorized and products and orders can be
+exported as CSV tables for further processing in Excel.
+
+Technically, LabHamster is a small and very standard Django project using not
+much more than the out-of-the-box Django admin interface with a pretty
+standard data model.
+
+### Installation Instructions (for development)
 
 Download, prepare virtual python environment and install dependencies:
 ```
@@ -35,6 +51,6 @@ Start Django's built-in debugging server:
 ./manage.py runserver
 ```
 
-Point your web browser to http://127.0.0.1:9000/admin
+Point your web browser to http://127.0.0.1:8000
 and enjoy!
 
