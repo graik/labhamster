@@ -14,13 +14,16 @@
 ## You should have received a copy of the GNU Affero General Public
 ## License along with labhamster. If not, see <http://www.gnu.org/licenses/>.
 """
-Django settings for labhamstersite project.
+Django settings for labhamster project.
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+# custom: distinguish development from production server
+import sys
+RUNNING_DEV_SERVER = ('runserver' in sys.argv)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -87,6 +90,11 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Activate SSL / HTTPS
+if not RUNNING_DEV_SERVER:
+	SECURE_SSL_REDIRECT = True # [1]
+	SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
