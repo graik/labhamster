@@ -27,6 +27,7 @@ The project is released under the MIT open source license.
 ### Installation Instructions (for development)
 
 Download, prepare virtual python environment and install dependencies:
+
     ```
     git clone https://github.com/graik/labhamster.git labhamsterdjango
     cd labhamsterdjango
@@ -34,21 +35,27 @@ Download, prepare virtual python environment and install dependencies:
     source env/bin/activate
     pip install -r requirements.txt
     ```
+    
 Create empty database tables (by default a very inefficient SQLite database, modify `settings.py` to change that).
+ 
     ```
     ./manage.py migrate
     ```
+
 Now create super user, recommended user name is "admin" (if you want to load the example data in the next step):
+ 
     ```
     ./manage.py createsuperuser
     ```
 
 You can load a very small example data set into the database. This will create one additional user "raik". 
+
     ```
     ./manage.py loaddata example_data.json
     ```
 
 Start Django's built-in debugging server:
+
     ```./manage.py runserver
     ```
 
