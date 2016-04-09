@@ -46,9 +46,11 @@ the example data in the next step):
 
 You can load a very small example data set into the database. This will
 create one additional user "raik":
+
 ``` ./manage.py loaddata example_data.json ```
 
 Start Django's built-in debugging server:
+
 ``` ./manage.py runserver```
 
 Point your web browser to http://127.0.0.1:8000 and enjoy!
