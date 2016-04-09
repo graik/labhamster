@@ -20,7 +20,9 @@ exported as CSV tables for further processing in Excel.
 
 Technically, LabHamster is a small and very standard Django project using not
 much more than the out-of-the-box Django admin interface with a pretty
-standard data model.
+standard data model. 
+
+The project is released under the MIT open source license.
 
 ### Installation Instructions (for development)
 
