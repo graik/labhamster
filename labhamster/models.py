@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 from customfields import DayModelField, DayConversion
 import tools as T
 
-APP_URL = '/admin/labhamster'
+APP_URL = '/labhamster'
 
 class Order(models.Model):
     STATUS_TYPES = (('draft', 'draft'),
