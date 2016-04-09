@@ -7,7 +7,7 @@
 <div class="module aligned">
   <h2>Orders</h2>
       <div class="description">
-        Note, clicking any of the links below will open a new window/tab!
+        Note, clicking any of the links below will open a new window/tab.
       </div>
 
       <p></p>
@@ -33,7 +33,7 @@
 
             <tr class="{% cycle 'row1' 'row2' %}">
     
-              <td><b><a href="../../{{order.get_relative_url}}" target="_blank">
+              <td><b><a href="{{order.get_absolute_url}}" target="_blank">
                  {{order.date_created}}</a></b></td>
               <td>{{order.created_by}}</td>
               <td>{{order.date_ordered|default:"--"}}</td>

@@ -7,7 +7,7 @@
 <div class="module aligned">
   <h2>Related Information</h2>
       <div class="description">
-        Note, clicking any of the links below will open a new window/tab!
+        Note, clicking any of the links below will open a new window/tab.
       </div>
 
       <p></p>
@@ -18,20 +18,20 @@
 
         <p>
       
-          <b><a href="../../{{original.item.get_relative_url}}" target="_blank">
-                 {{original.item.name}}</a></b>
+          <b><a href="{{original.product.get_absolute_url}}" target="_blank">
+                 {{original.product.name}}</a></b>
 
 
-          from <b><a href="../../{{original.item.vendor.get_relative_url}}" target="_blank">
-                    {{original.item.vendor}}</a></b>
+          from <b><a href="{{original.product.vendor.get_absolute_url}}" target="_blank">
+                    {{original.product.vendor}}</a></b>
 
-          ({{original.item.category}})<br>
-          Catalogue number: <b>{{original.item.catalog}}</b><br>
+          ({{original.product.category}})<br>
+          Catalogue number: <b>{{original.product.catalog}}</b><br>
 
-          {% if original.item.comment %}
+          {% if original.product.comment %}
 
              <b>Comment:</b>
-             {{original.item.comment|default:""|wordwrap:50}}
+             {{original.product.comment|default:""|wordwrap:50}}
 
           {% endif %}
 
@@ -39,7 +39,7 @@
 
       {% endif %}
 
-      {% if original and original.item.related_orders|length > 1 %}
+      {% if original and original.product.related_orders|length > 1 %}
 
        <h3>Other orders for the same product</h3>
 
@@ -54,13 +54,13 @@
           </thead>
           <tbody>
   
-          {% for order in original.item.related_orders %}
+          {% for order in original.product.related_orders %}
           
             {% if order.id != original.id %}
 
             <tr class="{% cycle 'row1' 'row2' %}">
     
-              <td><b><a href="../../{{order.get_relative_url}}" target="_blank">
+              <td><b><a href="{{order.get_absolute_url}}" target="_blank">
                  {{order.date_created}}</a></b></td>
               <td>{{order.created_by}}</td>
               <td>{{order.date_ordered|default:"--"}}</td>
@@ -80,7 +80,7 @@
         
       {% else %}
         <div class="description">
-          <b>No other Orders found for this item.</b></div>
+          <b>No other Orders found for this product.</b></div>
       {% endif %}
       
       </p>

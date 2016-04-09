@@ -22,7 +22,7 @@ def export_csv(request, queryset, fields):
     """
     Helper method for Admin make_csv action. Exports selected objects as 
     CSV file.
-    fields - OrderedDict of name / field pairs, see Item.make_csv for example
+    fields - OrderedDict of name / field pairs, see Product.make_csv for example
     """
     import csv
 
@@ -75,7 +75,7 @@ class VendorAdmin(admin.ModelAdmin):
 
 admin.site.register(Vendor, VendorAdmin)
 
-class ItemAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': (('name', 'category'),
                                     ('vendor', 'catalog', 'link'),
                                     ('status', 'shelflife'),
@@ -98,25 +98,25 @@ class ItemAdmin(admin.ModelAdmin):
 
     def make_ok(self, request, queryset):
         n = queryset.update(status='ok')
-        self.message_user(request, '%i items were updated' % n)
+        self.message_user(request, '%i products were updated' % n)
 
     make_ok.short_description = 'Mark selected entries as in stock'
 
     def make_low(self, request, queryset):
         n = queryset.update(status='low')
-        self.message_user(request, '%i items were updated' % n)
+        self.message_user(request, '%i products were updated' % n)
 
     make_low.short_description = 'Mark selected entries as running low'
 
     def make_out(self, request, queryset):
         n = queryset.update(status='out')
-        self.message_user(request, '%i items were updated' % n)
+        self.message_user(request, '%i products were updated' % n)
 
     make_out.short_description = 'Mark selected entries as out of stock'
 
     def make_deprecated(self, request, queryset):
         n = queryset.update(status='deprecated')
-        self.message_user(request, '%i items were updated' % n)
+        self.message_user(request, '%i products were updated' % n)
 
     make_deprecated.short_description = 'Mark selected entries as deprecated'
     
@@ -134,17 +134,17 @@ class ItemAdmin(admin.ModelAdmin):
                                ('Comment','comment')])
         return export_csv( request, queryset, fields)
     
-    make_csv.short_description = 'Export items as CSV'
+    make_csv.short_description = 'Export products as CSV'
 
-admin.site.register(Item, ItemAdmin)
+admin.site.register(Product, ProductAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
     
-    raw_id_fields = ('item',)
+    raw_id_fields = ('product',)
 
     fieldsets = ((None, 
-                  {'fields': (('status', 'item'), 
+                  {'fields': (('status', 'product'), 
                               ('created_by', 'ordered_by', 'date_ordered', 
                                'date_received'))}),
                  ('Details', {'fields': (('unit_size', 'quantity'),
@@ -155,14 +155,14 @@ class OrderAdmin(admin.ModelAdmin):
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('item', 'quantity', 'Price', 'requested', 'ordered', 
+    list_display = ('product', 'quantity', 'Price', 'requested', 'ordered', 
                     'received', 'truncated_comment', 'Status')
     list_filter = ('status', 
-                   'item__category__name', 'grant', 'created_by', 'item__vendor__name',)
-    ordering = ('-date_created', 'item', 'quantity')
+                   'product__category__name', 'grant', 'created_by', 'product__vendor__name',)
+    ordering = ('-date_created', 'product', 'quantity')
 
-    search_fields = ('comment', 'grant__name', 'grant__grant_id', 'item__name', 
-                     'item__vendor__name')
+    search_fields = ('comment', 'grant__name', 'grant__grant_id', 'product__name', 
+                     'product__vendor__name')
 
     save_as = True
 
@@ -194,15 +194,15 @@ class OrderAdmin(admin.ModelAdmin):
                             status='received')
         i = 0
         for order in queryset:
-            order.item.status = 'ok'
-            order.item.save()
+            order.product.status = 'ok'
+            order.product.save()
             i += 1
 
         self.message_user(request, 
-                          '%i orders were updated and %i items set to "in stock"'\
+                          '%i orders were updated and %i products set to "in stock"'\
                           % (n, i))
 
-    make_received.short_description= 'Mark as received (and update item status)'
+    make_received.short_description= 'Mark as received (and update product status)'
 
     def make_cancelled(self, request, queryset):
         import datetime
@@ -220,11 +220,11 @@ class OrderAdmin(admin.ModelAdmin):
         """
         from collections import OrderedDict
        
-        fields = OrderedDict( [('Item', 'item.name'),
+        fields = OrderedDict( [('Product', 'product.name'),
                                ('Quantity', 'quantity'),
                                ('Price','price'),
-                               ('Vendor','item.vendor.name'),
-                               ('Catalog','item.catalog'),
+                               ('Vendor','product.vendor.name'),
+                               ('Catalog','product.catalog'),
                                ('Requested','date_created'),
                                ('Requested by','created_by.username'),
                                ('Ordered','date_ordered'),

@@ -39,7 +39,7 @@ class Order(models.Model):
                                     help_text='Date when order was placed')
 
     date_received = models.DateField('received', blank=True, null=True, 
-                                     help_text='Date when item was received')
+                                     help_text='Date when product was received')
 
     ## recent Django Admin version do not sort users any longer
     ## workaround with custom form:
@@ -54,10 +54,10 @@ class Order(models.Model):
                                    related_name='orders', 
                                    help_text='user who sent this order out')
 
-    item = models.ForeignKey('Item', verbose_name='Item', related_name='orders', 
+    product = models.ForeignKey('Product', verbose_name='Product', related_name='orders', 
                              blank=False, null=False, 
-                help_text='Click the magnifying lens to select from the list of existing items.\n'+\
-                'For a new item, first click the lens, then click "Add Item" and fill out and save the Item form.' )
+                help_text='Click the magnifying lens to select from the list of existing products.\n'+\
+                'For a new product, first click the lens, then click "Add Product" and fill out and save the Product form.' )
 
     unit_size = models.CharField(max_length=20, blank=True, null=True,
                                  help_text='e.g. "10 l", "1 kg", "500 tips"')
@@ -80,10 +80,10 @@ class Order(models.Model):
     comment = models.TextField(blank=True, 
                                help_text="Order-related remarks. " +\
         "Please put catalog number and descriptions not here but into the "+\
-        "item page.") 
+        "product page.") 
 
     def __unicode__(self):
-        return u'%04i -- %s' % (self.id, unicode(self.item))
+        return u'%04i -- %s' % (self.id, unicode(self.product))
 
     def get_absolute_url(self):
         """
@@ -151,14 +151,14 @@ class Order(models.Model):
         ordering = ('date_created','id')
 
 
-class Item(models.Model):
+class Product(models.Model):
     
     name = models.CharField(max_length=60, unique=True,
-                            help_text='short descriptive name of this item')
+                            help_text='short descriptive name of this product')
     
     vendor = models.ForeignKey('Vendor', verbose_name='Vendor', 
                                blank=False, 
-                               help_text='select normal supplier of this item')
+                               help_text='select normal supplier of this product')
 
     catalog = models.CharField(max_length=30, unique=False, blank=False, 
                                help_text='catalogue number')
@@ -200,14 +200,14 @@ class Item(models.Model):
         """
         Define standard relative URL for object access in templates
         """
-        return 'item/%i/' % self.id
+        return 'product/%i/' % self.id
 
     def related_orders(self):
         """
-        @return: QuerySet of orders for this item
+        @return: QuerySet of orders for this product
         """
         if self.orders:
-            r = Order.objects.filter(item=self)
+            r = Order.objects.filter(product=self)
             return r
         return []
 
