@@ -1,0 +1,44 @@
+[
+{
+    "model": "labhamster.category",
+    "pk": 1,
+    "fields": {
+        "name": "lab consumables"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 2,
+    "fields": {
+        "name": "office supplies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 3,
+    "fields": {
+        "name": "antibodies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 4,
+    "fields": {
+        "name": "primers"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 5,
+    "fields": {
+        "name": "synthetic DNA"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 7,
+    "fields": {
+        "name": "services"
+    }
+}
+]
