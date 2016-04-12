@@ -1,1 +1,1 @@
-web: gunicorn labhamster.wsgi --log-file -
+web: gunicorn labhamstersite.wsgi --log-file -
