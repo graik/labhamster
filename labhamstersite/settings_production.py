@@ -20,8 +20,14 @@ RUNNING_DEV_SERVER = ('runserver' in sys.argv)
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dgzk#65d^1m702%+0mq^$i7-0e6qke^l#2l&+)=#dfl3@or08d'
-
+try:
+	## prepare env variable:
+	## heroku config:add DJANGO_SECRET_KEY="your_secret_key"
+	## Note: () are not tolerated in the key even using quotation marks
+	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+except:
+	SECRET_KEY = 'dgzk#65d^1m702%+0mq^$i7-0e6qke^l#2l&+)=#dfl3@or08d'
+	
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
