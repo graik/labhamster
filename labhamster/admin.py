@@ -6,6 +6,7 @@
 
 from labhamster.models import *
 from django.contrib import admin
+import django.forms
 from django.http import HttpResponse
 
 def export_csv(request, queryset, fields):
@@ -86,6 +87,13 @@ class ProductAdmin(admin.ModelAdmin):
                'make_deprecated',
                'make_csv']
 
+    ## reduce size of Description text field.
+    formfield_overrides = {
+        models.TextField: {'widget': django.forms.Textarea(
+            attrs={'rows': 4,
+                   'cols': 80})},
+    }    
+
     def make_ok(self, request, queryset):
         n = queryset.update(status='ok')
         self.message_user(request, '%i products were updated' % n)
@@ -159,6 +167,13 @@ class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_created'
 
     actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
+    
+    ## reduce size of Description text field.
+    formfield_overrides = {
+        models.TextField: {'widget': django.forms.Textarea(
+            attrs={'rows': 4,
+                   'cols': 80})},
+    }    
 
     def truncated_comment(self, obj):
         """shorten comment to 15 characters for table display"""
