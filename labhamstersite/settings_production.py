@@ -8,7 +8,7 @@
 Django settings for labhamster project.
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project like this: os.path.join(PROJECT_ROOT, ...)
 import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
@@ -26,7 +26,7 @@ try:
 	## Note: () are not tolerated in the key even using quotation marks
 	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 except:
-	SECRET_KEY = 'settings-k^(3w9m#hndetog(ap+f(m+^jn*vu&s4a9cv3%&a(fe)$aq=s'
+	SECRET_KEY = 'set-your-own-fall-back-secret-key'
 	
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -41,7 +41,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3'),
     }}
 
 import dj_database_url
