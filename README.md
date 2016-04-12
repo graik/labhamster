@@ -26,7 +26,9 @@ The project is released under the MIT open source license.
 
 ## Setup your own LabHamster instance on Heroku
 
-A version of LabHamster configured for Heroku is currently kept on the github branch `heroku`. However, the changes don't seem to work just as well for the development server so I will probably soon merge this branch back into `master`. The following instructions assume you are sitting on a Ubuntu (or Debian-based) Linux machine. They should be pretty generic though.
+If you only want to quickly set up a server on your local machine for testing and development, see next section below.
+
+A version of LabHamster configured for Heroku is currently kept on the github branch `heroku`. However, the changes seem to work just as well for the development server so I will probably soon merge this branch back into `master`. The following instructions assume you are sitting on a Ubuntu (or Debian-based) Linux machine. They should be pretty generic though.
 
 1. Create a free Heroku account: https://signup.heroku.com/signup/dc
 2. Install Heroku "tool belt":
