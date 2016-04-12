@@ -31,7 +31,7 @@ A version of LabHamster configured for Heroku is currently kept on the github br
 1. Create a free Heroku account: https://signup.heroku.com/signup/dc
 2. Install Heroku "tool belt":
 
-   ```
+   ```shell
    $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
    $ heroku login
    ```
@@ -39,14 +39,14 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    
 3. Create a local copy of the LabHamster project.
    
-   ```
+   ```shell
    $ git clone https://github.com/graik/labhamster.git labhamsterdjango
    ```
    This will create a new folder `labhamsterdjango` in your current directory.
    
 4. Create a heroku app.
    
-   ```sh
+   ```
    $ cd labhamsterdjango
    $ heroku login
       ... will ask for user name and password for your heroku account
@@ -75,11 +75,11 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    That's it, well almost :)! Now you should see a bunch of compilation and deployment messages from heroku 
    (this may take a while), and finally something like this:
    ```
-      remote: -----> Launching...
-      remote: https://myown-labhamster.herokuapp.com/ deployed to Heroku
-      remote: Verifying deploy... done.
-      To https://git.heroku.com/myown-labhamster.git
-      * [new branch] heroku -> master
+         remote: -----> Launching...
+         remote: https://myown-labhamster.herokuapp.com/ deployed to Heroku
+         remote: Verifying deploy... done.
+         To https://git.heroku.com/myown-labhamster.git
+         * [new branch] heroku -> master
    ```
    BTW, the `heroku:master` in the `git push` command is only needed because we are not using
    the `master` branch from the labhamster project. This will probably soon change.
@@ -87,7 +87,7 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    Or simply type: `heroku open` as a short-cut.
    There is only one little problem... we cannot login because we don't have any user account on 
    this server yet. Let's change that:
-   ```sh
+   ```
    $ heroku run ./manage.py createsuperuser
    ```
    This will now ask you for a user name and password for the super-user of your web server. 
@@ -97,9 +97,9 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    
    Your server is now live but empty. I have prepared two tiny data sets that should 
    make getting started easier. Load them by running the following command on your remote server:
-   ```sh
-   heroku run ./manage.py loaddata initial_usergroups.json
-   heroku run ./manage.py loaddata initial_categories.json
+   ```
+   $ heroku run ./manage.py loaddata initial_usergroups.json
+   $ heroku run ./manage.py loaddata initial_categories.json
    ```
    The first command will create two user groups: "labmember" and "labmanager". Any user that is part
    of the "labmember" group has the permission to file and modify products, orders and vendor records.
@@ -112,20 +112,23 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    In case things go wrong or out of curiosity, you should have a look at the log files of your web server.
    This is done with:
    
-   ```sh
-   heroku logs --tail
+   ```
+   $ heroku logs --tail
    ```
    The `--tail` will keep the log live, so that you can follow new entries arriving.
 
+Further reading:
+* https://devcenter.heroku.com/articles/django-app-configuration
+* https://devcenter.heroku.com/articles/getting-started-with-python
 
-## Installation Instructions (for development)
+## Setup Instructions for development
 
 Download, prepare virtual python environment and install dependencies:
 ```shell
 git clone https://github.com/graik/labhamster.git labhamsterdjango
 cd labhamsterdjango
-virtualenv env
-source env/bin/activate
+virtualenv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
     
