@@ -20,13 +20,14 @@ RUNNING_DEV_SERVER = ('runserver' in sys.argv)
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'settings-k^(3w9m#hndetog(ap+f(m+^jn*vu&s4a9cv3%&a(fe)$aq=s'
 try:
 	## prepare env variable:
 	## heroku config:add DJANGO_SECRET_KEY="your_secret_key"
 	## Note: () are not tolerated in the key even using quotation marks
-	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or SECRET_KEY
 except:
-	SECRET_KEY = 'settings-k^(3w9m#hndetog(ap+f(m+^jn*vu&s4a9cv3%&a(fe)$aq=s'
+	pass
 	
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -53,13 +54,13 @@ DATABASES['default'].update(db_from_env)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # https://devcenter.heroku.com/articles/django-app-configuration#static-assets-and-file-serving
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'labhamstersite','staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+##STATICFILES_DIRS = (
+##    os.path.join(PROJECT_ROOT, 'static'),
+##)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
