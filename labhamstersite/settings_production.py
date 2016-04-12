@@ -37,6 +37,12 @@ ALLOWED_HOSTS = ['*']
 # Database configuration by Heroku $DATABASE_URL
 # Use persistent connections
 # https://devcenter.heroku.com/articles/django-app-configuration#database-connection-persistence
+## this will be overriden by $DATABASE_URL configuration; but doesn't hurt
+DATABASES = { 
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }}
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
