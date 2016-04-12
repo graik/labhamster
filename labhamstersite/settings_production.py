@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['*']
 # Database configuration by Heroku $DATABASE_URL
 # Use persistent connections
 # https://devcenter.heroku.com/articles/django-app-configuration#database-connection-persistence
-## this will be overriden by $DATABASE_URL configuration; but doesn't hurt
+## this will be overriden by $DATABASE_URL configuration; sqlite is fall-back
 DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -138,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_L10N = False  ## de-activate automatic localization of numbers and dates
 USE_TZ = True
