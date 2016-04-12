@@ -81,8 +81,6 @@ A version of LabHamster configured for Heroku is currently kept on the github br
          To https://git.heroku.com/myown-labhamster.git
          * [new branch] heroku -> master
    ```
-   BTW, the `heroku:master` in the `git push` command is only needed because we are not using
-   the `master` branch from the labhamster project. This will probably soon change.
    You can now inspect your shiny new LabHamster web server by going to: https://myown-labhamster.herokuapp.com.
    Or simply type: `heroku open` as a short-cut.
    There is only one little problem... we cannot login because we don't have any user account on 
@@ -104,7 +102,7 @@ A version of LabHamster configured for Heroku is currently kept on the github br
    The first command will create two user groups: "labmember" and "labmanager". Any user that is part
    of the "labmember" group has the permission to file and modify products, orders and vendor records.
    Users that, *in addition*, are part of the "labmanager" group, moreover can create new user accounts,
-   can create new categories or grants.
+   new categories or grants.
    
    The second data fixture contains some popular product categories, typical for a biolab. Any user
    with 'labmanager' permissions can change, delete or add categories through the web interface.
