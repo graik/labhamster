@@ -26,7 +26,7 @@ try:
 	## Note: () are not tolerated in the key even using quotation marks
 	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 except:
-	SECRET_KEY = 'settings-k^(3w9m#hndetog(ap+f(m+^jn*vu&s4a9cv3%&a(fe)$aq=s'
+	SECRET_KEY = 'set-your-own-secret-fall-back0-key'
 	
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
