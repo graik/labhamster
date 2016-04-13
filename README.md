@@ -22,8 +22,6 @@ Technically, LabHamster is a small and very standard Django project using not
 much more than the out-of-the-box Django admin interface with a pretty
 standard data model. 
 
-The project is released under the MIT open source license.
-
 ## Setup your own LabHamster instance on Heroku
 
 Click the following button to quickly spin up your very own instance of the LabHamster web server:
@@ -171,3 +169,6 @@ Further reading:
 * https://devcenter.heroku.com/articles/django-app-configuration
 * https://devcenter.heroku.com/articles/getting-started-with-python
 
+## License
+
+LabHamster is released open source under the [MIT license](./LICENSE).
