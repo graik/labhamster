@@ -1,4 +1,4 @@
-# labhamster 
+# LabHamster 
 
 Django project for simple purchase / order management, mostly targetted at
 scientific labs. However, the work flow is very simple and generic:
