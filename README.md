@@ -55,8 +55,8 @@ modify `settings.py` to change that):
 ./manage.py migrate
 ```
 
-Now create super user, recommended user name is "admin" (if you want to load
-the example data in the next step): 
+Now create super user, recommended user name is "admin" (skip this step if you choose to load the example data 
+in the next step): 
 ```
 ./manage.py createsuperuser
 ```
