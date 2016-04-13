@@ -26,9 +26,59 @@ The project is released under the MIT open source license.
 
 ## Setup your own LabHamster instance on Heroku
 
-If you only want to quickly set up a server on your local machine for testing and development, see next section below.
+Click the following button to quickly spin up your very own instance of the LabHamster web server:
 
-A version of LabHamster configured for Heroku is currently kept on the github branch `heroku`. However, the changes seem to work just as well for the development server so I will probably soon merge this branch back into `master`. The following instructions assume you are sitting on a Ubuntu (or Debian-based) Linux machine. They should be pretty generic though.
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+Fill out the form and your web server will be up and running in a minute. The app name you choose will be part of the default address, which will look like this: https://my-app-name.herokuapp.com. You can later easily connect this server to your own domain. The free configuration offered by heroku should be fine for the kind of teams that LabHamster is intended for. However, it needs to be inactive for at least 6h per day and there are a couple of seconds delay when the server hasn't been used since more than 30 min. These restrictions are removed if you upgrade to the "hobby" scheme (7 USD / month).
+
+## Getting started
+
+1. Log in to the server with the `admin` user name and using labhamster2016 as your password. Then change the password by clicking the link in the upper left corner. You will find the database populated with two more example users (test_user and test_manager) and some example data and product categories. 
+2. Log in with the "normal" test_user account as well as with the test_manager account (same password as above) to test the different permissions given to each of them.
+3. Log in as admin and create a new user account. Assign the user to the  `labmember` group in order to give her or him basic permission to add and edit products, orders and vendor info.
+4. Create a new user account and assign it to *both* `labmember` and `labmanager` group in order to give her or him the permission to create and change product categories, grants, and to also add new user accounts.
+5. Once you have familiarized yourself with how all this works, delete the original test_user and test_manager users.
+
+## Setup Instructions for development
+
+Download, prepare virtual python environment and install dependencies:
+```shell
+git clone https://github.com/graik/labhamster.git labhamsterdjango
+cd labhamsterdjango
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements_local.txt
+```
+    
+Create empty database tables (by default a very inefficient SQLite database,
+modify `settings.py` to change that):
+```
+./manage.py migrate
+```
+
+Now create super user, recommended user name is "admin" (if you want to load
+the example data in the next step): 
+```
+./manage.py createsuperuser
+```
+
+You can load a very small example data set into the database. This will
+again create a super user "admin" with password labhamster2016:
+```
+./manage.py loaddata initial_data.json
+```
+
+Start Django's built-in debugging server:
+```
+./manage.py runserver
+```
+
+Point your web browser to http://127.0.0.1:8000 and enjoy!
+
+## Manual setup for Heroku *and* development
+
+The following instructions assume you are sitting on a Ubuntu (or Debian-based) Linux machine. They should be pretty generic though. Before you start, make sure [Python](http://python.org) and [Git](http://git.org) are installed on your machine.
 
 1. Create a free Heroku account: https://signup.heroku.com/signup/dc
 2. Install Heroku "tool belt":
@@ -120,40 +170,4 @@ A version of LabHamster configured for Heroku is currently kept on the github br
 Further reading:
 * https://devcenter.heroku.com/articles/django-app-configuration
 * https://devcenter.heroku.com/articles/getting-started-with-python
-
-## Setup Instructions for development
-
-Download, prepare virtual python environment and install dependencies:
-```shell
-git clone https://github.com/graik/labhamster.git labhamsterdjango
-cd labhamsterdjango
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-    
-Create empty database tables (by default a very inefficient SQLite database,
-modify `settings.py` to change that):
-```
-./manage.py migrate
-```
-
-Now create super user, recommended user name is "admin" (if you want to load
-the example data in the next step): 
-```
-./manage.py createsuperuser
-```
-
-You can load a very small example data set into the database. This will
-create one additional user "raik":
-```
-./manage.py loaddata example_data.json
-```
-
-Start Django's built-in debugging server:
-```
-./manage.py runserver
-```
-
-Point your web browser to http://127.0.0.1:8000 and enjoy!
 
