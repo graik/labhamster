@@ -11,6 +11,6 @@
   },
   "addons": [ "heroku-postgresql" ],
   "scripts": {
-      "postdeploy" : "./manage.py migrate --noinput; ./manage.py createsuperuser --username admin --email raik.gruenberg@gmail.com"
+      "postdeploy" : "./manage.py migrate --noinput; python manage.py loaddata initial_data.json"
       }
 }
