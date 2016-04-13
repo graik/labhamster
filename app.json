@@ -10,6 +10,6 @@
         }
   },
   "scripts": {
-      "postdeploy" : "./manage.py createsuperuser --noinput --username admin"
+      "postdeploy" : "./manage.py createsuperuser --noinput --username admin --email raik.gruenberg@gmail.com"
       }
 }
