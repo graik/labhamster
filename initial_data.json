@@ -1,0 +1,354 @@
+[
+{
+    "model": "labhamster.product",
+    "pk": 1,
+    "fields": {
+        "name": "raw Diamond",
+        "vendor": 1,
+        "catalog": "0123456789",
+        "category": 2,
+        "shelflife": 365000,
+        "status": "out",
+        "link": "",
+        "comment": "Very useful as a representative paperweight.",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.product",
+    "pk": 2,
+    "fields": {
+        "name": "E. coli genome v10",
+        "vendor": 1,
+        "catalog": "0123456789",
+        "category": 5,
+        "shelflife": 730,
+        "status": "out",
+        "link": "",
+        "comment": "custom genome",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.product",
+    "pk": 3,
+    "fields": {
+        "name": "P1000 pipette",
+        "vendor": 2,
+        "catalog": "0123456789",
+        "category": 10,
+        "shelflife": null,
+        "status": "out",
+        "link": "http://www.gilson.com/en/Pipette/Products/47.221/Default.aspx",
+        "comment": "",
+        "location": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 1,
+    "fields": {
+        "name": "Give Me Your Money Inc.",
+        "link": "http://thecorporation.com",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.vendor",
+    "pk": 2,
+    "fields": {
+        "name": "Gilson",
+        "link": "http://www.gilson.com",
+        "phone": "",
+        "email": "",
+        "contact": "",
+        "login": "",
+        "password": ""
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 1,
+    "fields": {
+        "name": "lab consumables"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 2,
+    "fields": {
+        "name": "office supplies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 3,
+    "fields": {
+        "name": "reagents /antibodies"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 4,
+    "fields": {
+        "name": "DNA / primers"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 5,
+    "fields": {
+        "name": "DNA / gene synthesis"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 7,
+    "fields": {
+        "name": "services"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 8,
+    "fields": {
+        "name": "reagents"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 9,
+    "fields": {
+        "name": "chemicals"
+    }
+},
+{
+    "model": "labhamster.category",
+    "pk": 10,
+    "fields": {
+        "name": "equipment"
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "labmember",
+        "permissions": [
+            [
+                "add_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "change_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "delete_order",
+                "labhamster",
+                "order"
+            ],
+            [
+                "add_product",
+                "labhamster",
+                "product"
+            ],
+            [
+                "change_product",
+                "labhamster",
+                "product"
+            ],
+            [
+                "delete_product",
+                "labhamster",
+                "product"
+            ],
+            [
+                "add_vendor",
+                "labhamster",
+                "vendor"
+            ],
+            [
+                "change_vendor",
+                "labhamster",
+                "vendor"
+            ],
+            [
+                "delete_vendor",
+                "labhamster",
+                "vendor"
+            ]
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "labmanager",
+        "permissions": [
+            [
+                "add_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "change_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "delete_category",
+                "labhamster",
+                "category"
+            ],
+            [
+                "add_grant",
+                "labhamster",
+                "grant"
+            ],
+            [
+                "change_grant",
+                "labhamster",
+                "grant"
+            ],
+            [
+                "delete_grant",
+                "labhamster",
+                "grant"
+            ]
+        ]
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$dNbTc2zURRVx$Oz2bD3ZEfJVAOn+ymUY2oLPqI92TlTTPLdGbwxBGQ0g=",
+        "last_login": "2016-04-13T07:57:42.401Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "your@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-13T07:45:06.703Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$XIeICQJyqj5w$3vYrKF4QKV6xOwMk8mtx42grQ4QhzPIe4uwhdxs5mPY=",
+        "last_login": "2016-04-13T08:17:18.170Z",
+        "is_superuser": false,
+        "username": "test_user",
+        "first_name": "John",
+        "last_name": "Test",
+        "email": "test@test.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-13T07:58:40Z",
+        "groups": [
+            [
+                "labmember"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$7Tn1sagVj2KH$1wwjcS0otKWuF3yLJ3oUtt/BzQ7AQ7G5WhsWW4PyzvI=",
+        "last_login": "2016-04-13T08:25:29.873Z",
+        "is_superuser": false,
+        "username": "test_manager",
+        "first_name": "Test",
+        "last_name": "Manager",
+        "email": "test@test.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-13T07:59:34Z",
+        "groups": [
+            [
+                "labmember"
+            ],
+            [
+                "labmanager"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 1,
+    "fields": {
+        "status": "pending",
+        "date_created": "2016-04-13",
+        "date_ordered": null,
+        "date_received": null,
+        "created_by": [
+            "test_user"
+        ],
+        "ordered_by": null,
+        "product": 1,
+        "unit_size": "20 carat",
+        "quantity": 1,
+        "price": null,
+        "grant_category": "equipment",
+        "grant": null,
+        "comment": "Couldn't find any prices online."
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 2,
+    "fields": {
+        "status": "pending",
+        "date_created": "2016-04-13",
+        "date_ordered": null,
+        "date_received": null,
+        "created_by": [
+            "test_user"
+        ],
+        "ordered_by": null,
+        "product": 2,
+        "unit_size": "4,639,221 bp",
+        "quantity": 1,
+        "price": "2319.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": "price negotiatable"
+    }
+},
+{
+    "model": "labhamster.order",
+    "pk": 3,
+    "fields": {
+        "status": "ordered",
+        "date_created": "2016-04-13",
+        "date_ordered": "2016-04-13",
+        "date_received": null,
+        "created_by": [
+            "test_user"
+        ],
+        "ordered_by": [
+            "test_manager"
+        ],
+        "product": 3,
+        "unit_size": "1",
+        "quantity": 1,
+        "price": "210.00",
+        "grant_category": "consumables",
+        "grant": null,
+        "comment": "may also be ordered as a starter kit with other versions."
+    }
+}
+]
