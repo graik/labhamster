@@ -9,6 +9,7 @@
           "generator": "secret"
         }
   },
+  "addons": [ "heroku-postgresql" ],
   "scripts": {
       "postdeploy" : "./manage.py createsuperuser --noinput --username admin --email raik.gruenberg@gmail.com"
       }
