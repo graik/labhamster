@@ -7,7 +7,8 @@
       "DJANGO_SECRET_KEY" : {
           "description": "A secret key for https encryption",
           "generator": "secret"
-      },
+        },
+  },
   "scripts": {
       "postdeploy" : "python manage.py loaddata initial_data.json"
       }
