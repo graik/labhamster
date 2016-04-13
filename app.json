@@ -10,6 +10,6 @@
         }
   },
   "scripts": {
-      "postdeploy" : "manage.py loaddata initial_data.json"
+      "postdeploy" : "./manage.py loaddata initial_data.json"
       }
 }
