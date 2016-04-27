@@ -9,6 +9,8 @@ from django.contrib import admin
 import django.forms
 from django.http import HttpResponse
 
+import customforms
+
 def export_csv(request, queryset, fields):
     """
     Helper method for Admin make_csv action. Exports selected objects as 
@@ -38,6 +40,23 @@ def export_csv(request, queryset, fields):
 
     return response
     
+
+class RequestFormAdmin(admin.ModelAdmin):
+    """
+    ModelAdmin that adds a 'request' field to the form generated
+    by the Admin. 
+    """
+
+    def get_form(self, request, obj=None, **kwargs):
+        """
+        Assign request variable to form
+        http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met
+        (last answer, much simpler than Django 1.6 version)
+        """
+        form = super(RequestFormAdmin, self).get_form(request, obj=obj, **kwargs)
+        form.request = request
+        return form   
+
 
 class GrantAdmin(admin.ModelAdmin):
     ordering = ('name',)
@@ -137,7 +156,8 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(RequestFormAdmin):
+    form = customforms.OrderForm
     
     raw_id_fields = ('product',)
 
