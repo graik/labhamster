@@ -31,6 +31,8 @@ Click the following button to quickly spin up your very own instance of the LabH
 Fill out the form and your web server will be up and running in a minute. The app name you choose will be part of the default address, which will look like this: https://my-app-name.herokuapp.com. You can later easily connect this server to your own domain. The free configuration offered by heroku should be fine for the kind of teams that LabHamster is intended for. However, it needs to be inactive for at least 6h per day and there are a couple of seconds delay when the server hasn't been used since more than 30 min. These restrictions are removed if you upgrade to the "hobby" scheme (7 USD / month).
 
 #### Modify and update a running heroku app
+   
+   - You can use the heroku dashboard to update your app directly from the labhamster.git repo.
 
    - To make changes to your LabHamster server, clone the app project locally using the [Heroku Toolbelt](https://toolbelt.heroku.com/):
 
@@ -38,12 +40,9 @@ Fill out the form and your web server will be up and running in a minute. The ap
       heroku login
       heroku git:clone --app YOURAPPNAME
       ```
-   - You can use the heroku dashboard to update your app directly from the labhamster.git repo.
-   - Alternatively, update through your local computer:
+   - ... and then update the heroku app from your local computer:
 
       ```sh
-      heroku login
-      heroku git:clone --app YOURAPPNAME
       cd YOURAPPNAME
       git remote add origin https://github.com/graik/labhamster
       git pull origin master # may trigger a few merge conflicts, depending on how long since last update

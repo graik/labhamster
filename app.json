@@ -12,5 +12,9 @@
   "addons": [ "heroku-postgresql" ],
   "scripts": {
       "postdeploy" : "./manage.py migrate --noinput; python manage.py loaddata initial_data.json"
-      }
+      },
+  "buildpacks": [
+      {"url": "heroku/python"},
+      {"url": "https://github.com/andreipetre/heroku-buildpack-django-migrate"}
+  ]
 }
