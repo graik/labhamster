@@ -180,11 +180,12 @@ class OrderAdmin(RequestFormAdmin):
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product', 'show_quantity', 'show_price', 'requested', 'ordered', 
-                    'received', 'show_comment', 'Status')
+    list_display = ('product',  'Status', 'show_quantity', 'show_price', 
+                    'requested', 'ordered', 
+                    'received', 'show_comment',)
     list_filter = ('status', 
                    'product__category__name', 'grant', 'created_by', 'product__vendor__name',)
-    ordering = ('-date_created', 'product', 'quantity')
+    ordering = ('-date_created', 'product', '-date_ordered', 'price')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'product__name', 
                      'product__vendor__name')
@@ -227,8 +228,7 @@ class OrderAdmin(RequestFormAdmin):
             else:
                 r += ' ' + o.currency.code
         return r 
-    
-    show_price.allow_tags = True
+    show_price.admin_order_field = 'price'
     show_price.short_description = 'Price'
     
 
