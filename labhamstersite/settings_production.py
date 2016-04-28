@@ -143,3 +143,7 @@ TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_L10N = False  ## de-activate automatic localization of numbers and dates
 USE_TZ = True
+
+# site-wide default for displaying dates
+DATE_FORMAT = 'Y-m-d'
+
