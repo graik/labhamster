@@ -173,11 +173,13 @@ class OrderAdmin(RequestFormAdmin):
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product', 'quantity', 'Price', 'requested', 'ordered', 
-                    'received', 'truncated_comment', 'Status')
+    list_display = ('product',  'Status', 'show_quantity', 'show_price', 
+                    'requested', 'ordered', 
+                    'received', 'show_comment',)
+
     list_filter = ('status', 
                    'product__category__name', 'grant', 'created_by', 'product__vendor__name',)
-    ordering = ('-date_created', 'product', 'quantity')
+    ordering = ('-date_created', 'product', '-date_ordered', 'price')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'product__name', 
                      'product__vendor__name')
@@ -195,10 +197,27 @@ class OrderAdmin(RequestFormAdmin):
                    'cols': 80})},
     }    
 
-    def truncated_comment(self, obj):
-        """shorten comment to 15 characters for table display"""
-        return T.truncate( obj.comment, 17 )
-    truncated_comment.short_description = 'comment'
+    def show_comment(self, obj):
+        """
+        @return: str; truncated comment with full comment mouse-over
+        """
+        if not obj.comment: 
+            return u''
+        if len(obj.comment) < 30:
+            return unicode(obj.comment)
+        r = unicode(obj.comment[:28])
+        r = '<a title="%s">%s</a>' % (obj.comment, T.truncate(obj.comment, 30))
+        return r
+    show_comment.short_description = 'comment'
+    show_comment.allow_tags = True
+    
+
+    def show_price(self, o):
+        if not o.price:
+            return u''
+        r = unicode('%6.2f' % o.price)
+    show_price.admin_order_field = 'price'
+    show_price.short_description = 'Price'
 
 
     def make_ordered(self, request, queryset):
