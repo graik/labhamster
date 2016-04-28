@@ -6,6 +6,7 @@
 
 import django.forms as forms
 import labhamster.models as M
+import django.contrib.messages as msg
 
 
 class OrderForm(forms.ModelForm):
@@ -23,6 +24,18 @@ class OrderForm(forms.ModelForm):
             ## stopped working in django 1.9:
             ## self.initial['created_by'] = str(self.request.user.id)
             self.fields['created_by'].initial = self.request.user.id
+
+    def clean(self):
+        """
+        """
+        data = super(OrderForm, self).clean()
+
+        price = data.get('price', None)
+        if price and not data.get('currency', None):
+            msg.warning(self.request, 'Note: currency set to default (%s)' % 
+                        M.Currency.objects.filter(is_default=True).first())
+        
+        return data
 
     class Meta:
         model = M.Order

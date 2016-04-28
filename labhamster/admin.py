@@ -68,6 +68,13 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
+class CurrencyAdmin(admin.ModelAdmin):
+    ordering = ('code',)
+    
+    list_display = ('code', 'symbol', 'name', 'is_default' )
+
+admin.site.register(Currency, CurrencyAdmin)
+
 
 class VendorAdmin(admin.ModelAdmin):
 
@@ -166,15 +173,15 @@ class OrderAdmin(RequestFormAdmin):
                               ('created_by', 'ordered_by', 'date_ordered', 
                                'date_received'))}),
                  ('Details', {'fields': (('unit_size', 'quantity'),
-                                         'price',
+                                         ('price', 'currency'),
                                          ('grant', 'grant_category'),
                                          'comment')}))
     
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product', 'quantity', 'Price', 'requested', 'ordered', 
-                    'received', 'truncated_comment', 'Status')
+    list_display = ('product', 'show_quantity', 'show_price', 'requested', 'ordered', 
+                    'received', 'show_comment', 'Status')
     list_filter = ('status', 
                    'product__category__name', 'grant', 'created_by', 'product__vendor__name',)
     ordering = ('-date_created', 'product', 'quantity')
@@ -195,11 +202,39 @@ class OrderAdmin(RequestFormAdmin):
                    'cols': 80})},
     }    
 
-    def truncated_comment(self, obj):
-        """shorten comment to 15 characters for table display"""
-        return T.truncate( obj.comment, 17 )
-    truncated_comment.short_description = 'comment'
+    def show_comment(self, obj):
+        """
+        @return: str; truncated comment with full comment mouse-over
+        """
+        if not obj.comment: 
+            return u''
+        if len(obj.comment) < 30:
+            return unicode(obj.comment)
+        r = unicode(obj.comment[:28])
+        r = '<a title="%s">%s</a>' % (obj.comment, T.truncate(obj.comment, 30))
+        return r
+    show_comment.short_description = 'comment'
+    show_comment.allow_tags = True
+    
 
+    def show_price(self, o):
+        if not o.price:
+            return u''
+        r = unicode('%6.2f' % o.price)
+        if o.currency:
+            if o.currency.symbol:
+                r = o.currency.symbol + ' ' + r
+            else:
+                r += ' ' + o.currency.code
+        return r 
+    
+    show_price.allow_tags = True
+    show_price.short_description = 'Price'
+    
+
+    def show_quantity(self, o):
+        return o.quantity
+    show_quantity.short_description = 'Q'
 
     def make_ordered(self, request, queryset):
         """

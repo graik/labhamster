@@ -60,6 +60,9 @@ class Order(models.Model):
                                 blank=True, null=True,
                                 help_text='cost per unit (!)')
 
+    currency = models.ForeignKey('Currency', verbose_name='Currency', 
+                                 blank=True, null=True)
+
     grant_category = models.CharField('Grant category', 
                                       choices=(('consumables', 'consumables'), 
                                                ('equipment', 'equipment')), 
@@ -89,7 +92,11 @@ class Order(models.Model):
         return 'order/%i/' % self.id
 
     def save(self, *args, **kwargs):
+        if self.price and not self.currency:
+            self.currency = Currency.objects.filter(is_default=True).first()
+
         super(Order, self).save(*args, **kwargs)
+        
 
     def Status(self):
         """color status display"""
@@ -293,3 +300,43 @@ class Grant(models.Model):
     class Meta:
         ordering = ('name', 'grant_id')
         verbose_name = 'Grant'
+        
+
+class SerializeByNameManager(models.Manager):
+    """
+    De-serialize objects and relations using name field rather than DB primary key.
+    See https://docs.djangoproject.com/en/dev/topics/serialization/#topics-serialization-natural-keys
+    """
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+
+class Currency(models.Model):
+    objects = SerializeByNameManager()
+
+    code = models.CharField(max_length=5, unique=True,
+                            verbose_name='Currency Code, e.g. USD')
+
+    name = models.CharField(max_length=30, unique=False,
+                            verbose_name='Name', 
+                            help_text='full name')
+
+    symbol = models.CharField(max_length=3, unique=True, blank=True, 
+                              verbose_name='Symbol', 
+                              help_text='paste unicode character, e.g. $')
+    
+    is_default = models.BooleanField('make Default', default=False,
+                                     help_text='make this the default currency')
+    
+    def __unicode__(self):
+        return self.code
+
+    def natural_key(self):
+        """
+        Serialize relations to these objects using code field rather than DB primary key.
+        See https://docs.djangoproject.com/en/dev/topics/serialization/#topics-serialization-natural-keys
+        """
+        return (self.code,)
+
+    class Meta:
+        verbose_name_plural = 'Currencies'
+        ordering = ('is_default', 'code',)
