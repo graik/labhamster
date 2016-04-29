@@ -24,6 +24,10 @@ class OrderForm(forms.ModelForm):
             ## stopped working in django 1.9:
             ## self.initial['created_by'] = str(self.request.user.id)
             self.fields['created_by'].initial = self.request.user.id
+        
+        ## only affects forms adding completely new entry
+        self.fields['currency'].initial = M.Currency.objects.filter(is_default=True).first()
+
 
     def clean(self):
         """

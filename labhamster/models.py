@@ -94,6 +94,8 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if self.price and not self.currency:
             self.currency = Currency.objects.filter(is_default=True).first()
+        if not self.price and self.currency:
+            self.currency = None
 
         super(Order, self).save(*args, **kwargs)
         
