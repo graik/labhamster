@@ -92,6 +92,10 @@ class Order(models.Model):
         return 'order/%i/' % self.id
 
     def save(self, *args, **kwargs):
+        """
+        Ensure price is always set together with currency and currency never 
+        set without price.
+        """
         if self.price and not self.currency:
             self.currency = Currency.objects.filter(is_default=True).first()
         if not self.price and self.currency:
@@ -337,8 +341,8 @@ class Currency(models.Model):
         Serialize relations to these objects using code field rather than DB primary key.
         See https://docs.djangoproject.com/en/dev/topics/serialization/#topics-serialization-natural-keys
         """
-        return (self.code,)
-
+        return (self.code,)        
+    
     class Meta:
         verbose_name_plural = 'Currencies'
         ordering = ('is_default', 'code',)
