@@ -7,7 +7,10 @@
       "DJANGO_SECRET_KEY" : {
           "description": "A secret key for https encryption",
           "generator": "secret"
-        }
+        },
+      "TIME_ZONE" : {
+          "description": "(default: Asia/Riyadh); see: http://en.wikipedia.org/wiki/List_of_tz_zones_by_name"
+      }
   },
   "addons": [ "heroku-postgresql" ],
   "scripts": {
