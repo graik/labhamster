@@ -219,6 +219,9 @@ class OrderAdmin(RequestFormAdmin):
     show_price.admin_order_field = 'price'
     show_price.short_description = 'Price'
 
+    def show_quantity(self, o):
+        return o.quantity
+    show_quantity.short_description = 'Q'
 
     def make_ordered(self, request, queryset):
         """
