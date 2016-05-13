@@ -138,11 +138,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE','en-us')
 TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Riyadh')
 USE_I18N = True
-
-# Note setting this to True will revert to the old Admin style
 USE_L10N = False  ## no automatic localization of numbers and dates
 USE_TZ = True
 
