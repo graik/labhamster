@@ -179,7 +179,7 @@ class OrderAdmin(RequestFormAdmin):
 
     list_filter = ('status', 
                    'product__category__name', 'grant', 'created_by', 'product__vendor__name',)
-    ordering = ('-date_created', 'product', '-date_ordered', 'price')
+    ordering = ('-date_created', 'product', '-date_ordered') #, 'price')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'product__name', 
                      'product__vendor__name')
@@ -213,11 +213,12 @@ class OrderAdmin(RequestFormAdmin):
     
 
     def show_price(self, o):
+        """Workaround for bug in djmoney -- MoneyField confuses Admin formatting"""
         if not o.price:
             return u''
-        r = unicode('%6.2f' % o.price)
+        return unicode(o.price)
     show_price.admin_order_field = 'price'
-    show_price.short_description = 'Price'
+    show_price.short_description = 'Unit price'
 
     def show_quantity(self, o):
         return o.quantity

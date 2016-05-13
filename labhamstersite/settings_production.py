@@ -141,9 +141,14 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Riyadh')
 USE_I18N = True
-USE_L10N = False  ## de-activate automatic localization of numbers and dates
+
+# Note setting this to True will revert to the old Admin style
+USE_L10N = False  ## no automatic localization of numbers and dates
 USE_TZ = True
 
 # site-wide default for displaying dates
 DATE_FORMAT = 'Y-m-d'
+
+# restrict available currencies (djmoney aka django-money package)
+CURRENCIES = ('USD', 'SAR', 'GBP', 'EUR')
 

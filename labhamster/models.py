@@ -4,10 +4,10 @@
 ## LabHamster is released under the MIT open source license, which you can find
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
 
-
 from django.db import models
 from django.contrib.auth.models import User
 from customfields import DayModelField, DayConversion
+from djmoney.models.fields import MoneyField
 import tools as T
 
 APP_URL = '/labhamster'
@@ -55,10 +55,10 @@ class Order(models.Model):
 
     quantity = models.IntegerField(default=1, 
                                    help_text='number of units ordered')
-
-    price = models.DecimalField('Unit price', max_digits=6, decimal_places=2, 
-                                blank=True, null=True,
-                                help_text='cost per unit (!)')
+    price = MoneyField('Unit price', max_digits=8, decimal_places=2, 
+                       default_currency='USD',
+                       blank=True, null=True, 
+                       help_text = 'cost per unit (!)')
 
     grant_category = models.CharField('Grant category', 
                                       choices=(('consumables', 'consumables'), 
@@ -131,7 +131,7 @@ class Order(models.Model):
     def Price(self):
         """filter '(None)' display in admin table"""
         if self.price:
-            return u'%7.2f' % self.price
+            return unicode(self.price)
         return u''
 
     Price.allow_tags = True
