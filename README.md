@@ -75,16 +75,15 @@ modify `settings.py` to change that):
 ./manage.py migrate
 ```
 
-Now create super user, recommended user name is "admin" (skip this step if you choose to load the example data 
-in the next step): 
-```
-./manage.py createsuperuser
-```
-
 You can load a very small example data set into the database. This will
-again create a super user "admin" with password labhamster2016:
+also create a super user "admin" with password labhamster2016:
 ```
 ./manage.py loaddata initial_data.json
+```
+
+If you did *not* load the example data, you should at least create a super. Recommended user name is "admin":
+```
+./manage.py createsuperuser
 ```
 
 Start Django's built-in debugging server:
