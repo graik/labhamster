@@ -81,7 +81,7 @@ also create a super user "admin" with password labhamster2016:
 ./manage.py loaddata initial_data.json
 ```
 
-If you did *not* load the example data, you should at least create a super. Recommended user name is "admin":
+If you did *not* load the example data, you should at least create a super user account. Otherwise you won't be able to log into your labhamster server.
 ```
 ./manage.py createsuperuser
 ```
