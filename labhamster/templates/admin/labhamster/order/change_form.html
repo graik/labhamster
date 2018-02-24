@@ -6,27 +6,26 @@
 
 <div class="module aligned">
   <h2>Related Information</h2>
-      <div class="description">
-        Note, clicking any of the links below will open a new window/tab.
-      </div>
-
       <p></p>
 
       {% if original %}
       
-      <h3>Product or Material</h3>
-
         <p>
-      
-          <b><a href="{{original.product.get_absolute_url}}" target="_blank">
-                 {{original.product.name}}</a></b>
-
-
-          from <b><a href="{{original.product.vendor.get_absolute_url}}" target="_blank">
-                    {{original.product.vendor}}</a></b>
-
-          ({{original.product.category}})<br>
-          Catalogue number: <b>{{original.product.catalog}}</b><br>
+            <big>Product:</big> 
+                <b><a href="{{original.product.get_absolute_url}}" target="_blank">
+                     {{original.product.name}}</a></b>&nbsp;
+                    ({{original.product.category}}) &nbsp;
+            <big>From:</big>
+                <b><a href="{{original.product.vendor.get_absolute_url}}" target="_blank">
+                        {{original.product.vendor}}</a></b>&nbsp;
+            <big>Catalogue number:</big> <b>{{original.product.catalog}}</b>
+            {% if original.product.link %}
+                <b><a href="{{original.product.link}}">Product web site</a></b>
+            {% else %}
+                (no product web site registered)
+            {% endif %}
+        
+        </p><p>
 
           {% if original.product.comment %}
 
