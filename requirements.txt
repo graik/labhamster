@@ -1,7 +1,7 @@
 Django>=1.11,<2.0
 argparse
 wsgiref
-django-money<=0.10
+django-money==0.12.3
 dj-database-url
 whitenoise
 gunicorn
