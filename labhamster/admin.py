@@ -189,7 +189,7 @@ class OrderAdmin(RequestFormAdmin):
                     'grant_category': admin.VERTICAL}
     
     list_display = ('product',  'Status', 'show_urgent', 'show_quantity', 'show_price', 
-                    'requested', 'ordered', 
+                    'requested', 'show_requestedby', 'ordered', 
                     'received', 'show_comment',)
 
     list_filter = ('status', 
@@ -237,6 +237,11 @@ class OrderAdmin(RequestFormAdmin):
     show_urgent.admin_order_field = 'is_urgent'
     show_urgent.short_description = '!'
 
+    def show_requestedby(self,o):
+        return o.created_by
+    show_requestedby.admin_order_field = 'created_by'
+    show_requestedby.short_description = 'By'
+    
 
     def show_quantity(self, o):
         return o.quantity
