@@ -159,12 +159,16 @@ class Product(models.Model):
                                help_text='select normal supplier of this product')
 
     catalog = models.CharField(max_length=30, unique=False, blank=False, 
-                               help_text='catalogue number')
+                               help_text='vendor catalogue number')
 
     manufacturer = models.ForeignKey('Vendor', verbose_name='Manufacturer', 
                                blank=True, null=True,
                                related_name='manufacturer_product',
                                help_text='original manufacturer if different')
+    
+    manufacturer_catalog = models.CharField(max_length=30, unique=False, 
+                                            blank=True, 
+                               help_text='manufacturer catalogue number')
 
     category = models.ForeignKey('Category', verbose_name='Product Category', 
                                  blank=False)
@@ -181,8 +185,8 @@ class Product(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='out')
 
-    link = models.URLField('Vendor Link', blank=True, 
-                           help_text='URL Link to product description')
+    link = models.URLField('Product Link', blank=True, 
+                           help_text='Product web site')
 
     comment = models.TextField('comments & description', blank=True, 
                                help_text='')

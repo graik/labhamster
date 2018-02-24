@@ -88,8 +88,9 @@ admin.site.register(Vendor, VendorAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': (('name', 'category'),
-                                    ('vendor', 'catalog', 'link', 
-                                     'manufacturer'),
+                                    ('vendor', 'catalog'), 
+                                    ('manufacturer', 'manufacturer_catalog'),
+                                    'link',
                                     ('status', 'shelflife'),
                                     'comment',
                                     'location')}),)
@@ -98,7 +99,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category', 'vendor')
 
     ordering = ('name',)
-    search_fields = ('name', 'comment', 'catalog', 'location', 'vendor__name')
+    search_fields = ('name', 'comment', 'catalog', 'location', 'vendor__name',
+                     'manufacturer__name', 'manufacturer_catalog')
 
     save_as = True
 
@@ -144,8 +146,9 @@ class ProductAdmin(admin.ModelAdmin):
         
         fields = OrderedDict( [('Name', 'name'),
                                ('Vendor', 'vendor.name'),
-                               ('Catalog','catalog'),
+                               ('Vendor Catalog','catalog'),
                                ('Manufacturer', 'manufacturer.name'),
+                               ('Manufacturer Catalog', 'manufacturer_catalog'),
                                ('Category','category.name'),
                                ('Shelf_life','shelflife'),
                                ('Status','status'),
