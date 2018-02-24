@@ -23,6 +23,9 @@ class Order(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='pending')
     
+    is_urgent = models.BooleanField('Urgent!', default=False, 
+                                    help_text='Mark this order as urgent')
+    
     date_created = models.DateField('requested', auto_now_add=True, 
                                     help_text='Date when order was created')
 
@@ -44,6 +47,10 @@ class Order(models.Model):
                                    verbose_name='ordered by', 
                                    related_name='orders', 
                                    help_text='user who sent this order out')
+
+    po_number = models.CharField('P.O.number',
+                                 max_length=20, blank=True, null=True,
+                                 help_text='')
 
     product = models.ForeignKey('Product', verbose_name='Product', related_name='orders', 
                              blank=False, null=False, 
@@ -152,7 +159,16 @@ class Product(models.Model):
                                help_text='select normal supplier of this product')
 
     catalog = models.CharField(max_length=30, unique=False, blank=False, 
-                               help_text='catalogue number')
+                               help_text='vendor catalogue number')
+
+    manufacturer = models.ForeignKey('Vendor', verbose_name='Manufacturer', 
+                               blank=True, null=True,
+                               related_name='manufacturer_product',
+                               help_text='original manufacturer if different')
+    
+    manufacturer_catalog = models.CharField(max_length=30, unique=False, 
+                                            blank=True, 
+                               help_text='manufacturer catalogue number')
 
     category = models.ForeignKey('Category', verbose_name='Product Category', 
                                  blank=False)
@@ -169,8 +185,8 @@ class Product(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='out')
 
-    link = models.URLField(blank=True, 
-                           help_text='URL Link to product description')
+    link = models.URLField('Product Link', blank=True, 
+                           help_text='Product web site')
 
     comment = models.TextField('comments & description', blank=True, 
                                help_text='')

@@ -1,5 +1,5 @@
 #!wing
-#!version=5.0
+#!version=6.0
 ##################################################################
 # Wing IDE project file                                          #
 ##################################################################
@@ -23,7 +23,8 @@ debug.launch-configs = (1,
                     '')})})
 proj.debug-sub-processes = True
 proj.directory-list = [{'dirloc': loc('.'),
-                        'excludes': [u'labhamster/templates/admin/index.html',
+                        'excludes': [u'venv',
+                                     u'labhamster/templates/admin/index.html',
                                      u'env'],
                         'filter': '*',
                         'include_hidden': False,

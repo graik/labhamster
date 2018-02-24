@@ -8,6 +8,7 @@ from labhamster.models import *
 from django.contrib import admin
 import django.forms
 from django.http import HttpResponse
+import django.utils.html as html
 
 import customforms
 
@@ -87,16 +88,19 @@ admin.site.register(Vendor, VendorAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': (('name', 'category'),
-                                    ('vendor', 'catalog', 'link'),
+                                    ('vendor', 'catalog'), 
+                                    ('manufacturer', 'manufacturer_catalog'),
+                                    'link',
                                     ('status', 'shelflife'),
                                     'comment',
                                     'location')}),)
     
-    list_display = ('name', 'vendor', 'category', 'shelf_life', 'status')
+    list_display = ('name', 'show_vendor', 'category', 'shelf_life', 'status')
     list_filter = ('status', 'category', 'vendor')
 
     ordering = ('name',)
-    search_fields = ('name', 'comment', 'catalog', 'location', 'vendor__name')
+    search_fields = ('name', 'comment', 'catalog', 'location', 'vendor__name',
+                     'manufacturer__name', 'manufacturer_catalog')
 
     save_as = True
 
@@ -142,7 +146,9 @@ class ProductAdmin(admin.ModelAdmin):
         
         fields = OrderedDict( [('Name', 'name'),
                                ('Vendor', 'vendor.name'),
-                               ('Catalog','catalog'),
+                               ('Vendor Catalog','catalog'),
+                               ('Manufacturer', 'manufacturer.name'),
+                               ('Manufacturer Catalog', 'manufacturer_catalog'),
                                ('Category','category.name'),
                                ('Shelf_life','shelflife'),
                                ('Status','status'),
@@ -153,6 +159,15 @@ class ProductAdmin(admin.ModelAdmin):
     
     make_csv.short_description = 'Export products as CSV'
 
+    def show_vendor(self, o):
+        """Display in table: Vendor (Manufacturer)"""
+        r = o.vendor.name
+        if o.manufacturer:
+            r += '<br>(%s)' % o.manufacturer.name
+        return html.format_html(r)
+    show_vendor.admin_order_field = 'vendor'
+    show_vendor.short_description = 'Vendor'
+
 admin.site.register(Product, ProductAdmin)
 
 
@@ -162,19 +177,19 @@ class OrderAdmin(RequestFormAdmin):
     raw_id_fields = ('product',)
 
     fieldsets = ((None, 
-                  {'fields': (('status', 'product'), 
+                  {'fields': (('status', 'is_urgent', 'product',), 
                               ('created_by', 'ordered_by', 'date_ordered', 
                                'date_received'))}),
                  ('Details', {'fields': (('unit_size', 'quantity'),
-                                         'price',
+                                         ('price', 'po_number'),
                                          ('grant', 'grant_category'),
                                          'comment')}))
     
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product',  'Status', 'show_quantity', 'show_price', 
-                    'requested', 'ordered', 
+    list_display = ('product',  'Status', 'show_urgent', 'show_quantity', 'show_price', 
+                    'requested', 'show_requestedby', 'ordered', 
                     'received', 'show_comment',)
 
     list_filter = ('status', 
@@ -190,13 +205,6 @@ class OrderAdmin(RequestFormAdmin):
 
     actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
     
-    ## reduce size of Description text field.
-    formfield_overrides = {
-        models.TextField: {'widget': django.forms.Textarea(
-            attrs={'rows': 4,
-                   'cols': 80})},
-    }    
-
     def show_comment(self, obj):
         """
         @return: str; truncated comment with full comment mouse-over
@@ -219,6 +227,21 @@ class OrderAdmin(RequestFormAdmin):
         return unicode(o.price)
     show_price.admin_order_field = 'price'
     show_price.short_description = 'Unit price'
+
+    def show_urgent(self, o):
+        """Show exclamation mark if order is urgent"""
+        if not o.is_urgent:
+            return u''
+        return html.format_html(
+            '<big>&#10071;</big>')
+    show_urgent.admin_order_field = 'is_urgent'
+    show_urgent.short_description = '!'
+
+    def show_requestedby(self,o):
+        return o.created_by
+    show_requestedby.admin_order_field = 'created_by'
+    show_requestedby.short_description = 'By'
+    
 
     def show_quantity(self, o):
         return o.quantity
@@ -273,12 +296,14 @@ class OrderAdmin(RequestFormAdmin):
                                ('Price','price'),
                                ('Vendor','product.vendor.name'),
                                ('Catalog','product.catalog'),
+                               ('PO Number', 'po_number'),
                                ('Requested','date_created'),
                                ('Requested by','created_by.username'),
                                ('Ordered','date_ordered'),
                                ('Ordered by','ordered_by.username'),
                                ('Received','date_received'),
                                ('Status','status'),
+                               ('Urgent','is_urgent'),
                                ('Comment','comment')])
         
         return export_csv(request, queryset, fields)
