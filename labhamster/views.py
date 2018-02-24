@@ -1,4 +1,4 @@
-## Copyright 2016 Raik Gruenberg
+## Copyright 2016 - 2018 Raik Gruenberg
 
 ## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
 ## LabHamster is released under the MIT open source license, which you can find
