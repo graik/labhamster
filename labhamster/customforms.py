@@ -27,3 +27,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = M.Order
         fields = "__all__" 
+        widgets = { 'po_number': forms.TextInput(attrs={'size': 20}),
+                    'comment':forms.Textarea(attrs={'rows': 4, 'cols': 80}),
+                    }
+        

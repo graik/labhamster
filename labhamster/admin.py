@@ -191,12 +191,12 @@ class OrderAdmin(RequestFormAdmin):
 
     actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
     
-    ## reduce size of Description text field.
-    formfield_overrides = {
-        models.TextField: {'widget': django.forms.Textarea(
-            attrs={'rows': 4,
-                   'cols': 80})},
-    }    
+##    ## reduce size of Description text field.
+##    formfield_overrides = {
+##        models.TextField: {'widget': django.forms.Textarea(
+##            attrs={'rows': 4,
+##                   'cols': 80})},
+##    }    
 
     def show_comment(self, obj):
         """
