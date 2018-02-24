@@ -88,12 +88,13 @@ admin.site.register(Vendor, VendorAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': (('name', 'category'),
-                                    ('vendor', 'catalog', 'link'),
+                                    ('vendor', 'catalog', 'link', 
+                                     'manufacturer'),
                                     ('status', 'shelflife'),
                                     'comment',
                                     'location')}),)
     
-    list_display = ('name', 'vendor', 'category', 'shelf_life', 'status')
+    list_display = ('name', 'show_vendor', 'category', 'shelf_life', 'status')
     list_filter = ('status', 'category', 'vendor')
 
     ordering = ('name',)
@@ -144,6 +145,7 @@ class ProductAdmin(admin.ModelAdmin):
         fields = OrderedDict( [('Name', 'name'),
                                ('Vendor', 'vendor.name'),
                                ('Catalog','catalog'),
+                               ('Manufacturer', 'manufacturer.name'),
                                ('Category','category.name'),
                                ('Shelf_life','shelflife'),
                                ('Status','status'),
@@ -153,6 +155,15 @@ class ProductAdmin(admin.ModelAdmin):
         return export_csv( request, queryset, fields)
     
     make_csv.short_description = 'Export products as CSV'
+
+    def show_vendor(self, o):
+        """Display in table: Vendor (Manufacturer)"""
+        r = o.vendor.name
+        if o.manufacturer:
+            r += '<br>(%s)' % o.manufacturer.name
+        return html.format_html(r)
+    show_vendor.admin_order_field = 'vendor'
+    show_vendor.short_description = 'Vendor'
 
 admin.site.register(Product, ProductAdmin)
 
@@ -191,13 +202,6 @@ class OrderAdmin(RequestFormAdmin):
 
     actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
     
-##    ## reduce size of Description text field.
-##    formfield_overrides = {
-##        models.TextField: {'widget': django.forms.Textarea(
-##            attrs={'rows': 4,
-##                   'cols': 80})},
-##    }    
-
     def show_comment(self, obj):
         """
         @return: str; truncated comment with full comment mouse-over
@@ -284,12 +288,14 @@ class OrderAdmin(RequestFormAdmin):
                                ('Price','price'),
                                ('Vendor','product.vendor.name'),
                                ('Catalog','product.catalog'),
+                               ('PO Number', 'po_number'),
                                ('Requested','date_created'),
                                ('Requested by','created_by.username'),
                                ('Ordered','date_ordered'),
                                ('Ordered by','ordered_by.username'),
                                ('Received','date_received'),
                                ('Status','status'),
+                               ('Urgent','is_urgent'),
                                ('Comment','comment')])
         
         return export_csv(request, queryset, fields)

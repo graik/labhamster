@@ -161,6 +161,11 @@ class Product(models.Model):
     catalog = models.CharField(max_length=30, unique=False, blank=False, 
                                help_text='catalogue number')
 
+    manufacturer = models.ForeignKey('Vendor', verbose_name='Manufacturer', 
+                               blank=True, null=True,
+                               related_name='manufacturer_product',
+                               help_text='original manufacturer if different')
+
     category = models.ForeignKey('Category', verbose_name='Product Category', 
                                  blank=False)
 
@@ -176,7 +181,7 @@ class Product(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='out')
 
-    link = models.URLField(blank=True, 
+    link = models.URLField('Vendor Link', blank=True, 
                            help_text='URL Link to product description')
 
     comment = models.TextField('comments & description', blank=True, 
