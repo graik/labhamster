@@ -8,6 +8,7 @@ from labhamster.models import *
 from django.contrib import admin
 import django.forms
 from django.http import HttpResponse
+import django.utils.html as html
 
 import customforms
 
@@ -162,18 +163,18 @@ class OrderAdmin(RequestFormAdmin):
     raw_id_fields = ('product',)
 
     fieldsets = ((None, 
-                  {'fields': (('status', 'product'), 
+                  {'fields': (('status', 'is_urgent', 'product',), 
                               ('created_by', 'ordered_by', 'date_ordered', 
                                'date_received'))}),
                  ('Details', {'fields': (('unit_size', 'quantity'),
-                                         'price',
+                                         ('price', 'po_number'),
                                          ('grant', 'grant_category'),
                                          'comment')}))
     
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product',  'Status', 'show_quantity', 'show_price', 
+    list_display = ('product',  'Status', 'show_urgent', 'show_quantity', 'show_price', 
                     'requested', 'ordered', 
                     'received', 'show_comment',)
 
@@ -219,6 +220,16 @@ class OrderAdmin(RequestFormAdmin):
         return unicode(o.price)
     show_price.admin_order_field = 'price'
     show_price.short_description = 'Unit price'
+
+    def show_urgent(self, o):
+        """Show exclamation mark if order is urgent"""
+        if not o.is_urgent:
+            return u''
+        return html.format_html(
+            '<big>&#10071;</big>')
+    show_urgent.admin_order_field = 'is_urgent'
+    show_urgent.short_description = '!'
+
 
     def show_quantity(self, o):
         return o.quantity

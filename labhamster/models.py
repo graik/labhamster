@@ -23,6 +23,9 @@ class Order(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_TYPES, 
                               default='pending')
     
+    is_urgent = models.BooleanField('Urgent!', default=False, 
+                                    help_text='Mark this order as urgent')
+    
     date_created = models.DateField('requested', auto_now_add=True, 
                                     help_text='Date when order was created')
 
@@ -44,6 +47,10 @@ class Order(models.Model):
                                    verbose_name='ordered by', 
                                    related_name='orders', 
                                    help_text='user who sent this order out')
+
+    po_number = models.CharField('P.O.number',
+                                 max_length=20, blank=True, null=True,
+                                 help_text='')
 
     product = models.ForeignKey('Product', verbose_name='Product', related_name='orders', 
                              blank=False, null=False, 
