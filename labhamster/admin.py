@@ -95,7 +95,8 @@ class ProductAdmin(admin.ModelAdmin):
                                     'comment',
                                     'location')}),)
     
-    list_display = ('name', 'show_vendor', 'category', 'shelf_life', 'status')
+    list_display = ('show_name', 'show_vendor', 'category', 'show_catalog',
+                     'status')
     list_filter = ('status', 'category', 'vendor')
 
     ordering = ('name',)
@@ -159,6 +160,15 @@ class ProductAdmin(admin.ModelAdmin):
     
     make_csv.short_description = 'Export products as CSV'
 
+
+    def show_name(self, o):
+        """truncate product name to less than 40 char"""
+        return html.format_html('<a href="{url}">{name}</a>', 
+                                url=o.get_absolute_url(),
+                                name=T.truncate(o.name, 40))
+    show_name.short_description = 'Name'
+    show_name.admin_order_field = 'name'
+
     def show_vendor(self, o):
         """Display in table: Vendor (Manufacturer)"""
         r = o.vendor.name
@@ -167,6 +177,11 @@ class ProductAdmin(admin.ModelAdmin):
         return html.format_html(r)
     show_vendor.admin_order_field = 'vendor'
     show_vendor.short_description = 'Vendor'
+    
+    def show_catalog(self, o):
+        return T.truncate(o.catalog, 15)
+    show_catalog.short_description = 'Catalog'
+    show_catalog.admin_order_field = 'catalog'
 
 admin.site.register(Product, ProductAdmin)
 
@@ -188,7 +203,8 @@ class OrderAdmin(RequestFormAdmin):
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
     
-    list_display = ('product',  'Status', 'show_urgent', 'show_quantity', 'show_price', 
+    list_display = ('show_title',  'Status', 'show_urgent', 
+                    'show_quantity', 'show_price', 
                     'requested', 'show_requestedby', 'ordered', 
                     'received', 'show_comment',)
 
@@ -204,6 +220,17 @@ class OrderAdmin(RequestFormAdmin):
     date_hierarchy = 'date_created'
 
     actions = ['make_ordered', 'make_received', 'make_cancelled', 'make_csv']
+    
+    def show_title(self, o):
+        """truncate product name + supplier to less than 40 char"""
+        n = T.truncate(o.product.name, 40)
+        v = o.product.vendor.name
+        r = html.format_html('<a href="{}">{}', o.get_absolute_url(), n)
+        r += '<br>' if len(n) + len(v) > 37 else ' '
+        r += html.format_html('[{}]</a>',v)
+        return html.mark_safe(r)
+    show_title.short_description = 'Product'
+        
     
     def show_comment(self, obj):
         """
