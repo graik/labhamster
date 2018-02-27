@@ -96,7 +96,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     'comment',
                                     'location')}),)
     
-    list_display = ('show_name', 'show_vendor', 'category', 'show_catalog',
+    list_display = ('name', 'show_vendor', 'category', 'show_catalog',
                      'status')
     list_filter = ('status', 'category', 'vendor')
 
@@ -161,7 +161,8 @@ class ProductAdmin(admin.ModelAdmin):
     
     make_csv.short_description = 'Export products as CSV'
 
-
+    ## note: this currently breaks the selection of products from the
+    ## order form "lense" button
     def show_name(self, o):
         """truncate product name to less than 40 char"""
         from django.utils.safestring import SafeUnicode
