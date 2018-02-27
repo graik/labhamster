@@ -243,8 +243,8 @@ class OrderAdmin(RequestFormAdmin):
         if not obj.comment: 
             return ''
         if len(obj.comment) < 30:
-            return unicode(obj.comment)
-        r = unicode(obj.comment[:28])
+            return obj.comment
+        r = obj.comment[:28]
         r = '<a title="%s">%s</a>' % (obj.comment, T.truncate(obj.comment, 30))
         return r
     show_comment.short_description = 'comment'
@@ -255,7 +255,7 @@ class OrderAdmin(RequestFormAdmin):
         """Workaround for bug in djmoney -- MoneyField confuses Admin formatting"""
         if not o.price:
             return ''
-        return unicode(o.price)
+        return o.price
     show_price.admin_order_field = 'price'
     show_price.short_description = 'Unit price'
 

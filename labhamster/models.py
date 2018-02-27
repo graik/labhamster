@@ -82,7 +82,7 @@ class Order(models.Model):
         "product page.") 
 
     def __unicode__(self):
-        return '%04i -- %s' % (self.id, unicode(self.product))
+        return '%04i -- %s' % (self.id, self.product)
 
     def get_absolute_url(self):
         """
@@ -139,7 +139,7 @@ class Order(models.Model):
     def Price(self):
         """filter '(None)' display in admin table"""
         if self.price:
-            return unicode(self.price)
+            return self.price
         return ''
 
     Price.allow_tags = True
@@ -196,7 +196,7 @@ class Product(models.Model):
                                 help_text='location in the lab')
 
     def __unicode__(self):
-        return '%s [%s]' % (self.name, unicode(self.vendor))
+        return '%s [%s]' % (self.name, self.vendor)
 
     def get_absolute_url(self):
         """
@@ -305,7 +305,7 @@ class Grant(models.Model):
     comment = models.TextField(blank=True)
 
     def __unicode__(self):
-        return unicode(self.name + ' ' + self.grant_id)
+        return self.name + ' ' + self.grant_id
 
     class Meta:
         ordering = ('name', 'grant_id')
