@@ -3,7 +3,7 @@
 ## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
 ## LabHamster is released under the MIT open source license, which you can find
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
-
+from __future__ import unicode_literals
 
 from django.db import models
 import django.forms as forms
@@ -155,7 +155,7 @@ class DayFormField(forms.MultiValueField):
         """
         if data_list and data_list[0]:
             duration = data_list[0]
-            unit = data_list[1] or u'1'
+            unit = data_list[1] or '1'
             unit = int(unit)
             return data_list[0] * unit
 

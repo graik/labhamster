@@ -3,6 +3,7 @@
 ## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
 ## LabHamster is released under the MIT open source license, which you can find
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
+from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -81,7 +82,7 @@ class Order(models.Model):
         "product page.") 
 
     def __unicode__(self):
-        return u'%04i -- %s' % (self.id, unicode(self.product))
+        return '%04i -- %s' % (self.id, unicode(self.product))
 
     def get_absolute_url(self):
         """
@@ -100,8 +101,8 @@ class Order(models.Model):
 
     def Status(self):
         """color status display"""
-        color = {u'ordered': '088A08',
-                 u'pending': 'B40404'}
+        color = {'ordered': '088A08',
+                 'pending': 'B40404'}
         return '<span style="color: #%s;">%s</span>' %\
                (color.get(self.status, '000000'), self.status)
 
@@ -112,7 +113,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_created:
             return self.date_created
-        return u''
+        return ''
 
     requested.allow_tags = True
     requested.admin_order_field = 'date_created'
@@ -121,7 +122,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_ordered:
             return self.date_ordered
-        return u''
+        return ''
 
     ordered.allow_tags = True
     ordered.admin_order_field = 'date_ordered'
@@ -130,7 +131,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.date_received:
             return self.date_received
-        return u''
+        return ''
 
     received.allow_tags = True
     received.admin_order_field = 'date_received'
@@ -139,7 +140,7 @@ class Order(models.Model):
         """filter '(None)' display in admin table"""
         if self.price:
             return unicode(self.price)
-        return u''
+        return ''
 
     Price.allow_tags = True
     Price.short_description = 'Unit price'
@@ -195,7 +196,7 @@ class Product(models.Model):
                                 help_text='location in the lab')
 
     def __unicode__(self):
-        return u'%s [%s]' % (self.name, unicode(self.vendor))
+        return '%s [%s]' % (self.name, unicode(self.vendor))
 
     def get_absolute_url(self):
         """
@@ -304,7 +305,7 @@ class Grant(models.Model):
     comment = models.TextField(blank=True)
 
     def __unicode__(self):
-        return unicode(self.name + u' ' + self.grant_id)
+        return unicode(self.name + ' ' + self.grant_id)
 
     class Meta:
         ordering = ('name', 'grant_id')

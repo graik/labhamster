@@ -3,6 +3,7 @@
 ## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
 ## LabHamster is released under the MIT open source license, which you can find
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
+from __future__ import unicode_literals
 
 from labhamster.models import *
 from django.contrib import admin
@@ -163,9 +164,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     def show_name(self, o):
         """truncate product name to less than 40 char"""
-        return html.format_html('<a href="{url}">{name}</a>', 
-                                url=o.get_absolute_url(),
-                                name=T.truncate(o.name, 40))
+        from django.utils.safestring import SafeUnicode
+        return html.format_html(
+            '<a href="{url}" title="{comment}">{name}</a>', 
+                url=o.get_absolute_url(),
+                name=T.truncate(o.name, 40),
+                comment=SafeUnicode(o.comment))
     show_name.short_description = 'Name'
     show_name.admin_order_field = 'name'
 
@@ -237,7 +241,7 @@ class OrderAdmin(RequestFormAdmin):
         @return: str; truncated comment with full comment mouse-over
         """
         if not obj.comment: 
-            return u''
+            return ''
         if len(obj.comment) < 30:
             return unicode(obj.comment)
         r = unicode(obj.comment[:28])
@@ -250,7 +254,7 @@ class OrderAdmin(RequestFormAdmin):
     def show_price(self, o):
         """Workaround for bug in djmoney -- MoneyField confuses Admin formatting"""
         if not o.price:
-            return u''
+            return ''
         return unicode(o.price)
     show_price.admin_order_field = 'price'
     show_price.short_description = 'Unit price'
@@ -258,7 +262,7 @@ class OrderAdmin(RequestFormAdmin):
     def show_urgent(self, o):
         """Show exclamation mark if order is urgent"""
         if not o.is_urgent:
-            return u''
+            return ''
         return html.format_html(
             '<big>&#10071;</big>')
     show_urgent.admin_order_field = 'is_urgent'

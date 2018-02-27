@@ -3,10 +3,10 @@
 ## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
 ## LabHamster is released under the MIT open source license, which you can find
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
-
 """
 Django settings for labhamster project.
 """
+from __future__ import unicode_literals
 
 # Build paths inside the project like this: os.path.join(PROJECT_ROOT, ...)
 import os
