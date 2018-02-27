@@ -18,6 +18,5 @@
       },
   "buildpacks": [
       {"url": "heroku/python"},
-      {"url": "https://github.com/andreipetre/heroku-buildpack-django-migrate"}
   ]
 }
