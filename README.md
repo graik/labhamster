@@ -26,7 +26,8 @@ standard data model.
 
 Click the following button to quickly spin up your very own instance of the LabHamster web server:
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?env[TIME_ZONE]=Europe/Berlin
+)
 
 Fill out the form and your web server will be up and running in a minute. The app name you choose will be part of the default address, which will look like this: https://my-app-name.herokuapp.com. You can later easily connect this server to your own domain. The free configuration offered by heroku should be fine for the kind of teams that LabHamster is intended for. However, it needs to be inactive for at least 6h per day and there are a couple of seconds delay when the server hasn't been used since more than 30 min. These restrictions are removed if you upgrade to the "hobby" scheme (7 USD / month).
 
