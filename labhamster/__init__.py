@@ -5,7 +5,7 @@
 ## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
 from __future__ import unicode_literals
 
-VERSION = (1,4,1)
+VERSION = (1,4,2)
 
 __version__ = '.'.join([ str(i) for i in VERSION])
 
