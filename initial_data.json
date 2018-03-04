@@ -302,6 +302,7 @@
         "unit_size": "20 carat",
         "quantity": 1,
         "price": null,
+        "price_currency": "USD",
         "grant_category": "equipment",
         "grant": null,
         "comment": "Couldn't find any prices online."
@@ -323,6 +324,7 @@
         "unit_size": "4,639,221 bp",
         "quantity": 1,
         "price": "2319.00",
+        "price_currency": "USD",
         "grant_category": "consumables",
         "grant": null,
         "comment": "price negotiatable"
@@ -346,6 +348,7 @@
         "unit_size": "1",
         "quantity": 1,
         "price": "210.00",
+        "price_currency": "USD",
         "grant_category": "consumables",
         "grant": null,
         "comment": "may also be ordered as a starter kit with other versions."
