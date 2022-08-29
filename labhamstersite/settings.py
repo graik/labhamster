@@ -1,19 +1,20 @@
-## Copyright 2016 - 2018 Raik Gruenberg
+# Copyright 2016 - 2018 Raik Gruenberg
 
-## This file is part of the LabHamster project (https://github.com/graik/labhamster). 
-## LabHamster is released under the MIT open source license, which you can find
-## along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
+# This file is part of the LabHamster project (https://github.com/graik/labhamster).
+# LabHamster is released under the MIT open source license, which you can find
+# along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
 """
 Django settings for labhamster project.
 """
 from __future__ import unicode_literals
+import dj_database_url
+import sys
 
 # Build paths inside the project like this: os.path.join(PROJECT_ROOT, ...)
 import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # custom: distinguish development from production server
-import sys
 RUNNING_DEV_SERVER = ('runserver' in sys.argv)
 
 # Quick-start development settings - unsuitable for production
@@ -22,13 +23,13 @@ RUNNING_DEV_SERVER = ('runserver' in sys.argv)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'settings-k^(3w9m#hndetog(ap+f(m+^jn*vu&s4a9cv3%&a(fe)$aq=s'
 try:
-	## prepare env variable:
-	## heroku config:add DJANGO_SECRET_KEY="your_secret_key"
-	## Note: () are not tolerated in the key even using quotation marks
-	SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or SECRET_KEY
+    # prepare env variable:
+    # heroku config:add DJANGO_SECRET_KEY="your_secret_key"
+    # Note: () are not tolerated in the key even using quotation marks
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or SECRET_KEY
 except:
-	pass
-	
+    pass
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG', 'False'))
 
@@ -38,14 +39,13 @@ ALLOWED_HOSTS = ['*']
 # Database configuration by Heroku $DATABASE_URL
 # Use persistent connections
 # https://devcenter.heroku.com/articles/django-app-configuration#database-connection-persistence
-## this will be overriden by $DATABASE_URL configuration; sqlite is fall-back
-DATABASES = { 
+# this will be overriden by $DATABASE_URL configuration; sqlite is fall-back
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3'),
     }}
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -54,13 +54,13 @@ DATABASES['default'].update(db_from_env)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # https://devcenter.heroku.com/articles/django-app-configuration#static-assets-and-file-serving
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'labhamstersite','staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'labhamstersite', 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-##STATICFILES_DIRS = (
+# STATICFILES_DIRS = (
 ##    os.path.join(PROJECT_ROOT, 'static'),
-##)
+# )
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -100,9 +100,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                 os.path.join(PROJECT_ROOT, 'labhamster', 'templates'),
-                 os.path.join(PROJECT_ROOT, 'site_templates'),
-                 ],
+            os.path.join(PROJECT_ROOT, 'labhamster', 'templates'),
+            os.path.join(PROJECT_ROOT, 'site_templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,28 +121,28 @@ TEMPLATES = [
 
 # Activate SSL / HTTPS
 if not RUNNING_DEV_SERVER:
-	SECURE_SSL_REDIRECT = True # [1]
-	SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True  # [1]
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+     },
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+     },
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+     },
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+     },
 ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
-LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE','en-us')
+LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE', 'en-us')
 TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Riyadh')
 USE_I18N = True
-USE_L10N = False  ## no automatic localization of numbers and dates
+USE_L10N = False  # no automatic localization of numbers and dates
 USE_TZ = True
 
 # site-wide default for displaying dates
@@ -150,4 +150,3 @@ DATE_FORMAT = 'Y-m-d'
 
 # restrict available currencies (djmoney aka django-money package)
 CURRENCIES = ('USD', 'SAR', 'GBP', 'EUR')
-
