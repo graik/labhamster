@@ -11,7 +11,8 @@ import django.forms
 from django.http import HttpResponse
 import django.utils.html as html
 
-import customforms
+from . import customforms
+
 
 def export_csv(request, queryset, fields):
     """
