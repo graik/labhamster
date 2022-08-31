@@ -72,8 +72,7 @@ class DayConversion:
         -> ( int, int ) - ( duration, factor ) where factor is 1, 7, 30 or 365
         """
         choices = zip(DayConversion.UNITS, DayConversion.CONVERSION)
-        choices.reverse()
-        for unit, factor in choices:
+        for unit, factor in reversed(list(choices)):
             if value % factor == 0:
                 return (value / factor, factor)
 
