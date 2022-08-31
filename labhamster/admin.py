@@ -225,7 +225,7 @@ class OrderAdmin(RequestFormAdmin):
     ordering = ('-date_created', 'product', '-date_ordered')  # , 'price')
 
     search_fields = ('comment', 'grant__name', 'grant__grant_id', 'product__name',
-                     'product__vendor__name')
+                     'product__vendor__name', 'po_number')
 
     save_as = True
 
