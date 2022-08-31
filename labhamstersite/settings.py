@@ -6,7 +6,6 @@
 """
 Django settings for labhamster project.
 """
-from __future__ import unicode_literals
 import dj_database_url
 import sys
 

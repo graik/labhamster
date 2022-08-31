@@ -3,7 +3,6 @@
 # This file is part of the LabHamster project (https://github.com/graik/labhamster).
 # LabHamster is released under the MIT open source license, which you can find
 # along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
-from __future__ import unicode_literals
 
 from labhamster.models import *
 from django.contrib import admin
@@ -36,8 +35,7 @@ def export_csv(request, queryset, fields):
             except:
                 columns.append("")  # capture 'None' fields
 
-        columns = [c.encode('utf-8') if type(c) is unicode else c
-                   for c in columns]
+        columns = [c for c in columns]
 
         writer.writerow(columns)
 
