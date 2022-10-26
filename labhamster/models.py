@@ -81,7 +81,7 @@ class Order(models.Model):
                                "Please put catalog number and descriptions not here but into the " +
                                "product page.")
 
-    def __unicode__(self):
+    def __str__(self):
         return '%04i -- %s' % (self.id, self.product)
 
     def get_absolute_url(self):
@@ -195,7 +195,7 @@ class Product(models.Model):
     location = models.CharField(max_length=60, blank=True,
                                 help_text='location in the lab')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s [%s]' % (self.name, self.vendor)
 
     def get_absolute_url(self):
@@ -265,7 +265,7 @@ class Vendor(models.Model):
     class Meta:
         ordering = ('name',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -287,7 +287,7 @@ class Category(models.Model):
                             verbose_name='Product Category',
                             help_text='name of product category')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -304,7 +304,7 @@ class Grant(models.Model):
 
     comment = models.TextField(blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name + ' ' + self.grant_id
 
     class Meta:
