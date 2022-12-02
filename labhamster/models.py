@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .customfields import DayModelField, DayConversion
 from djmoney.models.fields import MoneyField
+from datetime import date
 from . import tools as T
 
 APP_URL = '/labhamster'
@@ -97,6 +98,10 @@ class Order(models.Model):
         return 'order/%i/' % self.id
 
     def save(self, *args, **kwargs):
+        if self.status == "ordered" and self.date_ordered is None:
+            self.date_ordered = date.today()
+        elif self.status == "received" and self.date_received is None:
+            self.date_received = date.today()
         super(Order, self).save(*args, **kwargs)
 
     def Status(self):
