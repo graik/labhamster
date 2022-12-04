@@ -1,9 +1,9 @@
 Django>=1.11,<2.0
 argparse
-wsgiref
+django-custom-field==1.5
 django-money==0.12.3
-dj-database-url
-whitenoise
+py-moneyed==1.2
+dj-database-url==0.5.0
 gunicorn
-psycopg2
+psycopg2-binary==2.8.6
 whitenoise
