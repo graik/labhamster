@@ -213,7 +213,7 @@ class OrderAdmin(RequestFormAdmin):
     radio_fields = {'grant': admin.VERTICAL,
                     'grant_category': admin.VERTICAL}
 
-    list_display = ('show_title',  'Status', 'show_urgent',
+    list_display = ('show_title', 'Status', 'show_urgent',
                     'show_quantity', 'show_price',
                     'requested', 'show_requestedby', 'ordered',
                     'received', 'show_comment',)

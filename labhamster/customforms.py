@@ -4,6 +4,8 @@
 # LabHamster is released under the MIT open source license, which you can find
 # along with this project (LICENSE) or at <https://opensource.org/licenses/MIT>.
 import django.forms as forms
+from django.db.models import Case, When
+from django.contrib.auth.models import User
 import labhamster.models as M
 
 
@@ -22,6 +24,12 @@ class OrderForm(forms.ModelForm):
             # stopped working in django 1.9:
             ## self.initial['created_by'] = str(self.request.user.id)
             self.fields['created_by'].initial = self.request.user.id
+
+        users = User.objects.order_by(
+            Case(When(id=self.request.user.id, then=0), default=1), 'username')
+
+        self.fields['created_by'] = forms.ModelChoiceField(users)
+        self.fields['ordered_by'] = forms.ModelChoiceField(users)
 
     class Meta:
         model = M.Order
