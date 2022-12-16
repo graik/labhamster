@@ -28,8 +28,8 @@ class OrderForm(forms.ModelForm):
         users = User.objects.order_by(
             Case(When(id=self.request.user.id, then=0), default=1), 'username')
 
-        self.fields['created_by'] = forms.ModelChoiceField(users)
-        self.fields['ordered_by'] = forms.ModelChoiceField(users)
+        self.fields['created_by'].queryset = users
+        self.fields['ordered_by'].queryset = users
 
     class Meta:
         model = M.Order
