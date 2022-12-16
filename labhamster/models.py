@@ -307,6 +307,8 @@ class Grant(models.Model):
 
     grant_id = models.CharField(max_length=30, unique=True, blank=True)
 
+    active = models.BooleanField('Active', default=True)
+
     comment = models.TextField(blank=True)
 
     def __str__(self):
