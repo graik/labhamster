@@ -31,7 +31,12 @@ class OrderForm(forms.ModelForm):
         self.fields['created_by'].queryset = users
         self.fields['ordered_by'].queryset = users
 
-        grants = M.Grant.objects.filter(active=True)
+        if self.instance.grant:
+            grants = M.Grant.objects.filter(active=True) \
+                | M.Grant.objects.filter(pk=self.instance.grant.pk)
+        else:
+            grants = M.Grant.objects.filter(active=True)
+
         self.fields['grant'].queryset = grants
 
     class Meta:
