@@ -31,8 +31,21 @@ class OrderForm(forms.ModelForm):
         self.fields['created_by'].queryset = users
         self.fields['ordered_by'].queryset = users
 
-        grants = M.Grant.objects.filter(active=True)
+        if self.instance.grant:
+            grants = M.Grant.objects.filter(active=True) \
+                | M.Grant.objects.filter(pk=self.instance.grant.pk)
+        else:
+            grants = M.Grant.objects.filter(active=True)
+
         self.fields['grant'].queryset = grants
+        self.fields['grant'].label_from_instance = self.label_from_instance
+
+    def label_from_instance(self, option):
+        """Sets the string displayed in the form for the given option."""
+        label = option.__str__()
+        if not option.active:
+            label += " (expired)"
+        return label
 
     class Meta:
         model = M.Order
